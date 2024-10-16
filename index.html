@@ -1,0 +1,3722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crop Water Footprint</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e0f7fa; /* Light cyan background */
+            padding: 20px;
+            transition: background-color 0.5s; /* Smooth background transition */
+        }
+        h1 {
+            color: #00695c; /* Darker teal */
+            text-align: center;
+            animation: fadeIn 1s; /* Animation on heading */
+        }
+        select, button {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 5px; /* Rounded corners */
+            border: 1px solid #00695c; /* Border color */
+            transition: background-color 0.3s, transform 0.3s; /* Button animations */
+        }
+        select:hover, button:hover {
+            background-color: #b2dfdb; /* Light teal on hover */
+            transform: scale(1.05); /* Scale effect */
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #00695c;
+            background-color: #ffffff; /* White background for results */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            animation: fadeIn 1s; /* Animation for results */
+        }
+        .chart-container {
+            position: relative;
+            height: 400px; /* Set a fixed height for the chart */
+            width: 400px; /* Set a fixed width for the chart */
+            margin: 20px auto; /* Center the chart */
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Select Crop to Get Water Footprint Details</h1>
+
+    <label for="cropSelect">Choose a crop:</label>
+    <select id="cropSelect">
+        <option value="Rice">Rice</option>
+        <option value="Cotton">Cotton</option>
+       
+          <option value="Cotton">Cotton</option>
+          <option value="Sugarcane">Sugarcane</option>
+          <option value="Tea">Tea</option>
+          <option value="Wheat">Wheat</option>
+          <option value="Pulses">Pulses</option>
+          <option value="Milk">Milk</option>
+          <option value="Mangoes">Mangoes</option>
+          <option value="Black Pepper">Black Pepper</option>
+          <option value="Soybean">Soybean</option>
+          <option value="Barley">Barley</option>
+          <option value="Almonds">Almonds</option>
+          <option value="Oranges">Oranges</option>
+          <option value="Apples">Apples</option>
+          <option value="Peanuts">Peanuts</option>
+          <option value="Chickpeas">Chickpeas</option>
+          <option value="Cashews">Cashews</option>
+          <option value="Jute">Jute</option>
+          <option value="Mustard Seeds">Mustard Seeds</option>
+          <option value="Cardamom">Cardamom</option>
+          <option value="Ginger">Ginger</option>
+          <option value="Turmeric">Turmeric</option>
+          <option value="Coriander">Coriander</option>
+          <option value="Cloves">Cloves</option>
+          <option value="Vanilla">Vanilla</option>
+          <option value="Papaya">Papaya</option>
+          <option value="Pineapple">Pineapple</option>
+          <option value="Guava">Guava</option>
+          <option value="Brinjal">Brinjal</option>
+          <option value="Tomatoes">Tomatoes</option>
+          <option value="Cauliflower">Cauliflower</option>
+          <option value="Spinach">Spinach</option>
+          <option value="Lettuce">Lettuce</option>
+          <option value="Cucumbers">Cucumbers</option>
+          <option value="Potatoes">Potatoes</option>
+          <option value="Onions">Onions</option>
+          <option value="Carrots">Carrots</option>
+          <option value="Beetroot">Beetroot</option>
+          <option value="Pears">Pears</option>
+          <option value="Peaches">Peaches</option>
+          <option value="Plums">Plums</option>
+          <option value="Cherries">Cherries</option>
+          <option value="Grapes">Grapes</option>
+          <option value="Dates">Dates</option>
+          <option value="Raisins">Raisins</option>
+          <option value="Walnuts">Walnuts</option>
+          <option value="Hazelnuts">Hazelnuts</option>
+          <option value="Pistachios">Pistachios</option>
+          <option value="Sunflower Seeds">Sunflower Seeds</option>
+          <option value="Safflower">Safflower</option>
+          <option value="Sesame Seeds">Sesame Seeds</option>
+          <option value="Flax Seeds">Flax Seeds</option>
+          <option value="Chia Seeds">Chia Seeds</option>
+          <option value="Pumpkin Seeds">Pumpkin Seeds</option>
+          <option value="Quinoa">Quinoa</option>
+          <option value="Oats">Oats</option>
+          <option value="Rye">Rye</option>
+          <option value="Millets">Millets</option>
+          <option value="Sorghum">Sorghum</option>
+          <option value="Tapioca">Tapioca</option>
+          <option value="Sweet Potatoes">Sweet Potatoes</option>
+          <option value="Yams">Yams</option>
+          <option value="Chili Peppers">Chili Peppers</option>
+          <option value="Garlic">Garlic</option>
+          <option value="Leeks">Leeks</option>
+          <option value="Celery">Celery</option>
+          <option value="Mushrooms">Mushrooms</option>
+          <option value="Asparagus">Asparagus</option>
+          <option value="Green Beans">Green Beans</option>
+          <option value="Peas">Peas</option>
+          <option value="Cabbage">Cabbage</option>
+          <option value="Broccoli">Broccoli</option>
+          <option value="Kale">Kale</option>
+          <option value="Strawberries">Strawberries</option>
+          <option value="Raspberries">Raspberries</option>
+          <option value="Blueberries">Blueberries</option>
+          <option value="Cranberries">Cranberries</option>
+          <option value="Pine Nuts">Pine Nuts</option>
+          <option value="Pecans">Pecans</option>
+          <option value="Brazil Nuts">Brazil Nuts</option>
+          <option value="Macadamia Nuts">Macadamia Nuts</option>
+          <option value="Sesame Oil">Sesame Oil</option>
+          <option value="Sunflower Oil">Sunflower Oil</option>
+          <option value="Soybean Oil">Soybean Oil</option>
+          <option value="Palm Oil">Palm Oil</option>
+          <option value="Coconut Oil">Coconut Oil</option>
+          <option value="Olive Oil">Olive Oil</option>
+          <option value="Canola Oil">Canola Oil</option>
+          <option value="Corn">Corn</option>
+          <option value="Wheat Flour">Wheat Flour</option>
+          <option value="Barley Malt">Barley Malt</option>
+          <option value="Maize Flour">Maize Flour</option>
+          <option value="Sorghum Flour">Sorghum Flour</option>
+          <option value="Rye Flour">Rye Flour</option>
+          <option value="Oat Flour">Oat Flour</option>
+          <option value="Chickpea Flour">Chickpea Flour</option>
+          <option value="Pea Flour">Pea Flour</option>
+          <option value="Lentil Flour">Lentil Flour</option>
+          <option value="Soy Flour">Soy Flour</option>
+          <option value="Cottonseed Oil">Cottonseed Oil</option>
+          <option value="Rapeseed Oil">Rapeseed Oil</option>
+          <option value="Almond Oil">Almond Oil</option>
+          <option value="Walnut Oil">Walnut Oil</option>
+          <option value="Hazelnut Oil">Hazelnut Oil</option>
+          <option value="Pistachio Oil">Pistachio Oil</option>
+          <option value="Flaxseed Oil">Flaxseed Oil</option>
+          <option value="Chia Oil">Chia Oil</option>
+          <option value="Pumpkin Seed Oil">Pumpkin Seed Oil</option>
+          <option value="Safflower Oil">Safflower Oil</option>
+          <option value="Grapeseed Oil">Grapeseed Oil</option>
+          <option value="Avocado Oil">Avocado Oil</option>
+          <option value="Tea">Tea</option>
+          <option value="Coffee">Coffee</option>
+          <option value="Cacao">Cacao</option>
+          <option value="Cinnamon">Cinnamon</option>
+          <option value="Nutmeg">Nutmeg</option>
+          <option value="Garlic Powder">Garlic Powder</option>
+          <option value="Onion Powder">Onion Powder</option>
+          <option value="Mustard Powder">Mustard Powder</option>
+          <option value="Curry Powder">Curry Powder</option>
+          <option value="Paprika">Paprika</option>
+          <option value="Chili Powder">Chili Powder</option>
+          <option value="Vanilla Beans">Vanilla Beans</option>
+          <option value="Basil">Basil</option>
+          <option value="Oregano">Oregano</option>
+          <option value="Rosemary">Rosemary</option>
+          <option value="Thyme">Thyme</option>
+          <option value="Coffee Beans">Coffee Beans</option>
+          <option value="Cocoa Beans">Cocoa Beans</option>
+          <option value="Tea Leaves">Tea Leaves</option>
+          <option value="Poppy Seeds">Poppy Seeds</option>
+          <option value="Hemp Seeds">Hemp Seeds</option>
+          <option value="Fruit Juices">Fruit Juices</option>
+          <option value="Vegetable Juices">Vegetable Juices</option>
+          <option value="Nutritional Supplements">Nutritional Supplements</option>
+          <option value="Protein Powders">Protein Powders</option>
+          <option value="Meal Replacement Bars">Meal Replacement Bars</option>
+          <option value="Snack Bars">Snack Bars</option>
+          <option value="Energy Bars">Energy Bars</option>
+          <option value="Cereal Bars">Cereal Bars</option>
+          <option value="Granola Bars">Granola Bars</option>
+          <option value="Rice">Rice</option>
+          <option value="Pasta">Pasta</option>
+          <option value="Noodles">Noodles</option>
+          <option value="Couscous">Couscous</option>
+          <option value="Bread">Bread</option>
+          <option value="Bagels">Bagels</option>
+          <option value="Pita Bread">Pita Bread</option>
+          <option value="Tortillas">Tortillas</option>
+          <option value="Crackers">Crackers</option>
+          <option value="Pizza">Pizza</option>
+          <option value="Dumplings">Dumplings</option>
+          <option value="Spring Rolls">Spring Rolls</option>
+          <option value="Pancakes">Pancakes</option>
+          <option value="Waffles">Waffles</option>
+          <option value="Cakes">Cakes</option>
+          <option value="Cookies">Cookies</option>
+          <option value="Brownies">Brownies</option>
+          <option value="Muffins">Muffins</option>
+          <option value="Cupcakes">Cupcakes</option>
+          <option value="Fudge">Fudge</option>
+          <option value="Ice Cream">Ice Cream</option>
+          <option value="Frozen Yogurt">Frozen Yogurt</option>
+          <option value="Custard">Custard</option>
+          <option value="Sorbet">Sorbet</option>
+          <option value="Pudding">Pudding</option>
+          <option value="Jelly">Jelly</option>
+          <option value="Sauces">Sauces</option>
+          <option value="Ketchup">Ketchup</option>
+          <option value="Mustard">Mustard</option>
+          <option value="Mayonnaise">Mayonnaise</option>
+          <option value="Barbecue Sauce">Barbecue Sauce</option>
+          <option value="Soy Sauce">Soy Sauce</option>
+          <option value="Hot Sauce">Hot Sauce</option>
+          <option value="Vinegar">Vinegar</option>
+          <option value="Salad Dressings">Salad Dressings</option>
+          <option value="Peanut Butter">Peanut Butter</option>
+          <option value="Nut Butters">Nut Butters</option>
+          <option value="Hummus">Hummus</option>
+          <option value="Pesto">Pesto</option>
+          <option value="Tahini">Tahini</option>
+          <option value="Fruit Purees">Fruit Purees</option>
+          <option value="Vegetable Purees">Vegetable Purees</option>
+          <option value="Flavored Yogurts">Flavored Yogurts</option>
+          <option value="Cheeses">Cheeses</option>
+          <option value="Cheddar Cheese">Cheddar Cheese</option>
+          <option value="Mozzarella Cheese">Mozzarella Cheese</option>
+          <option value="Feta Cheese">Feta Cheese</option>
+          <option value="Goat Cheese">Goat Cheese</option>
+          <option value="Cream Cheese">Cream Cheese</option>
+          <option value="Ricotta Cheese">Ricotta Cheese</option>
+          <option value="Parmesan Cheese">Parmesan Cheese</option>
+          <option value="Blue Cheese">Blue Cheese</option>
+          <option value="Paneer">Paneer</option>
+          <option value="Yogurt">Yogurt</option>
+          <option value="Buttermilk">Buttermilk</option>
+          <option value="Sour Cream">Sour Cream</option>
+          <option value="Eggs">Eggs</option>
+          <option value="Chicken">Chicken</option>
+          <option value="Beef">Beef</option>
+          <option value="Pork">Pork</option>
+          <option value="Lamb">Lamb</option>
+          <option value="Turkey">Turkey</option>
+          <option value="Fish">Fish</option>
+          <option value="Shrimp">Shrimp</option>
+          <option value="Crab">Crab</option>
+          <option value="Lobster">Lobster</option>
+          <option value="Clams">Clams</option>
+          <option value="Oysters">Oysters</option>
+          <option value="Mussels">Mussels</option>
+          <option value="Game Meat">Game Meat</option>
+          <option value="Sausages">Sausages</option>
+          <option value="Salami">Salami</option>
+          <option value="Bacon">Bacon</option>
+          <option value="Deli Meats">Deli Meats</option>
+          <option value="Tofu">Tofu</option>
+          <option value="Tempeh">Tempeh</option>
+          <option value="Seitan">Seitan</option>
+          <option value="Quorn">Quorn</option>
+          <option value="Plant-Based Burgers">Plant-Based Burgers</option>
+          <option value="Veggie Dogs">Veggie Dogs</option>
+          <option value="Chili">Chili</option>
+          <option value="Soup">Soup</option>
+          <option value="Broth">Broth</option>
+          <option value="Stock">Stock</option>
+          <option value="Curry">Curry</option>
+          <option value="Chili Con Carne">Chili Con Carne</option>
+          <option value="Stir-Fry">Stir-Fry</option>
+          <option value="Casserole">Casserole</option>
+          <option value="Sushi">Sushi</option>
+          <option value="Sashimi">Sashimi</option>
+          <option value="Tapas">Tapas</option>
+          <option value="Mezze">Mezze</option>
+          <option value="Dim Sum">Dim Sum</option>
+          <option value="Brunch">Brunch</option>
+          <option value="Dinner">Dinner</option>
+          <option value="Snack">Snack</option>
+          <option value="Breakfast">Breakfast</option>
+          <option value="Dessert">Dessert</option>
+          <option value="Appetizers">Appetizers</option>
+          <option value="Entrees">Entrees</option>
+          <option value="Main Course">Main Course</option>
+          <option value="Side Dishes">Side Dishes</option>
+          <option value="Beverages">Beverages</option>
+          <option value="Smoothies">Smoothies</option>
+          <option value="Cocktails">Cocktails</option>
+          <option value="Sodas">Sodas</option>
+          <option value="Water">Water</option>
+          <option value="Sparkling Water">Sparkling Water</option>
+          <option value="Herbal Teas">Herbal Teas</option>
+          <option value="Energy Drinks">Energy Drinks</option>
+          <option value="Sports Drinks">Sports Drinks</option>
+          <option value="Coffee Substitutes">Coffee Substitutes</option>
+          <option value="Herbal Infusions">Herbal Infusions</option>
+          <option value="Flavored Water">Flavored Water</option>
+          <option value="Functional Beverages">Functional Beverages</option>
+          <option value="Plant-Based Milk">Plant-Based Milk</option>
+          <option value="Almond Milk">Almond Milk</option>
+          <option value="Soy Milk">Soy Milk</option>
+          <option value="Oat Milk">Oat Milk</option>
+          <option value="Coconut Milk">Coconut Milk</option>
+          <option value="Rice Milk">Rice Milk</option>
+          <option value="Cashew Milk">Cashew Milk</option>
+          <option value="Hemp Milk">Hemp Milk</option>
+          <option value="Flax Milk">Flax Milk</option>
+          <option value="Pea Milk">Pea Milk</option>
+          <option value="Macadamia Milk">Macadamia Milk</option>
+          <option value="Protein Drinks">Protein Drinks</option>
+          <option value="Meal Replacement Shakes">Meal Replacement Shakes</option>
+          <option value="Plant-Based Creamers">Plant-Based Creamers</option>
+          <option value="Coconut Cream">Coconut Cream</option>
+          <option value="Whipped Cream">Whipped Cream</option>
+          <option value="Non-Dairy Creamers">Non-Dairy Creamers</option>
+          <option value="Condensed Milk">Condensed Milk</option>
+          <option value="Sweetened Condensed Milk">Sweetened Condensed Milk</option>
+          <option value="Evaporated Milk">Evaporated Milk</option>
+          <option value="Coconut Milk Powder">Coconut Milk Powder</option>
+          <option value="Almond Milk Powder">Almond Milk Powder</option>
+          <option value="Soy Milk Powder">Soy Milk Powder</option>
+          <option value="Oat Milk Powder">Oat Milk Powder</option>
+          <option value="Rice Milk Powder">Rice Milk Powder</option>
+          <option value="Cacao Powder">Cacao Powder</option>
+          <option value="Matcha Powder">Matcha Powder</option>
+          <option value="Spirulina Powder">Spirulina Powder</option>
+          <option value="Protein Powder">Protein Powder</option>
+          <option value="Flour Mixes">Flour Mixes</option>
+          <option value="Baking Mixes">Baking Mixes</option>
+          <option value="Gluten-Free Baking Mixes">Gluten-Free Baking Mixes</option>
+          <option value="Protein Bars">Protein Bars</option>
+          <option value="Snack Bars">Snack Bars</option>
+          <option value="Energy Bars">Energy Bars</option>
+          <option value="Health Supplements">Health Supplements</option>
+          <option value="Vitamins">Vitamins</option>
+          <option value="Minerals">Minerals</option>
+          <option value="Herbs and Spices">Herbs and Spices</option>
+          <option value="Hot Sauces">Hot Sauces</option>
+          <option value="Herbal Supplements">Herbal Supplements</option>
+          <option value="Probiotics">Probiotics</option>
+          <option value="Fat Burners">Fat Burners</option>
+          <option value="Meal Supplements">Meal Supplements</option>
+          <option value="Nutritional Yeast">Nutritional Yeast</option>
+          <option value="Mushroom Supplements">Mushroom Supplements</option>
+          <option value="Essential Oils">Essential Oils</option>
+          <option value="Fermented Foods">Fermented Foods</option>
+          <option value="Cultured Foods">Cultured Foods</option>
+          <option value="Nutritional Supplements">Nutritional Supplements</option>
+          <option value="Pet Foods">Pet Foods</option>
+          <option value="Special Dietary Foods">Special Dietary Foods</option>
+          <option value="Baby Foods">Baby Foods</option>
+          <option value="Dietary Snacks">Dietary Snacks</option>
+          <option value="Natural Sweeteners">Natural Sweeteners</option>
+          <option value="Sugar Substitutes">Sugar Substitutes</option>
+          <option value="Liquid Sweeteners">Liquid Sweeteners</option>
+          <option value="Granulated Sweeteners">Granulated Sweeteners</option>
+          <option value="Seasoning Mixes">Seasoning Mixes</option>
+          <option value="Salad Toppings">Salad Toppings</option>
+          <option value="Fruit Snacks">Fruit Snacks</option>
+          <option value="Vegetable Snacks">Vegetable Snacks</option>
+          <option value="Nut Snacks">Nut Snacks</option>
+          <option value="Seed Snacks">Seed Snacks</option>
+          <option value="Snack Mixes">Snack Mixes</option>
+          <option value="Protein Snacks">Protein Snacks</option>
+          <option value="Sweet Snacks">Sweet Snacks</option>
+          <option value="Savory Snacks">Savory Snacks</option>
+          <option value="Dried Fruits">Dried Fruits</option>
+          <option value="Trail Mixes">Trail Mixes</option>
+          <option value="Fruit Chips">Fruit Chips</option>
+          <option value="Vegetable Chips">Vegetable Chips</option>
+          <option value="Nut Butters">Nut Butters</option>
+          <option value="Chips and Dips">Chips and Dips</option>
+          <option value="Chocolate Bars">Chocolate Bars</option>
+          <option value="Candy">Candy</option>
+          <option value="Jelly Beans">Jelly Beans</option>
+          <option value="Gummy Snacks">Gummy Snacks</option>
+          <option value="Chewing Gum">Chewing Gum</option>
+          <option value="Fruits">Fruits</option>
+          <option value="Vegetables">Vegetables</option>
+          <option value="Legumes">Legumes</option>
+          <option value="Nuts">Nuts</option>
+          <option value="Seeds">Seeds</option>
+          <option value="Grains">Grains</option>
+          <option value="Cereals">Cereals</option>
+          <option value="Pseudocereals">Pseudocereals</option>
+          <option value="Superfoods">Superfoods</option>
+          <option value="Exotic Foods">Exotic Foods</option>
+          <option value="Miscellaneous">Miscellaneous</option>
+        
+          
+            <option value="Cloves">Cloves</option>
+            <option value="Anise">Anise</option>
+            <option value="Fennel">Fennel</option>
+            <option value="Star Anise">Star Anise</option>
+            <option value="Cilantro">Cilantro</option>
+            <option value="Parsley">Parsley</option>
+            <option value="Dill">Dill</option>
+            <option value="Mint">Mint</option>
+            <option value="Tarragon">Tarragon</option>
+            <option value="Basil">Basil</option>
+            <option value="Sage">Sage</option>
+            <option value="Chili Peppers">Chili Peppers</option>
+            <option value="Bell Peppers">Bell Peppers</option>
+            <option value="Habanero Peppers">Habanero Peppers</option>
+            <option value="Poblano Peppers">Poblano Peppers</option>
+            <option value="Serrano Peppers">Serrano Peppers</option>
+            <option value="Tomatillos">Tomatillos</option>
+            <option value="Squash">Squash</option>
+            <option value="Pumpkin">Pumpkin</option>
+            <option value="Zucchini">Zucchini</option>
+            <option value="Eggplant">Eggplant</option>
+            <option value="Bok Choy">Bok Choy</option>
+            <option value="Mushrooms">Mushrooms</option>
+            <option value="Kale">Kale</option>
+            <option value="Collard Greens">Collard Greens</option>
+            <option value="Swiss Chard">Swiss Chard</option>
+            <option value="Spinach">Spinach</option>
+            <option value="Fennel Bulb">Fennel Bulb</option>
+            <option value="Jerusalem Artichokes">Jerusalem Artichokes</option>
+            <option value="Artichokes">Artichokes</option>
+            <option value="Endive">Endive</option>
+            <option value="Radicchio">Radicchio</option>
+            <option value="Radishes">Radishes</option>
+            <option value="Beets">Beets</option>
+            <option value="Turnips">Turnips</option>
+            <option value="Carrots">Carrots</option>
+            <option value="Parsnips">Parsnips</option>
+            <option value="Sweet Potatoes">Sweet Potatoes</option>
+            <option value="Yams">Yams</option>
+            <option value="Potatoes">Potatoes</option>
+            <option value="Cabbage">Cabbage</option>
+            <option value="Broccoli">Broccoli</option>
+            <option value="Cauliflower">Cauliflower</option>
+            <option value="Brussels Sprouts">Brussels Sprouts</option>
+            <option value="Savoy Cabbage">Savoy Cabbage</option>
+            <option value="Napa Cabbage">Napa Cabbage</option>
+            <option value="Kohlrabi">Kohlrabi</option>
+            <option value="Peas">Peas</option>
+            <option value="Green Beans">Green Beans</option>
+            <option value="Lima Beans">Lima Beans</option>
+            <option value="Fava Beans">Fava Beans</option>
+            <option value="Soybeans">Soybeans</option>
+            <option value="Chickpeas">Chickpeas</option>
+            <option value="Peanuts">Peanuts</option>
+            <option value="Lentils">Lentils</option>
+            <option value="Kidney Beans">Kidney Beans</option>
+            <option value="Pinto Beans">Pinto Beans</option>
+            <option value="Black Beans">Black Beans</option>
+            <option value="Navy Beans">Navy Beans</option>
+            <option value="Great Northern Beans">Great Northern Beans</option>
+            <option value="Mung Beans">Mung Beans</option>
+            <option value="Adzuki Beans">Adzuki Beans</option>
+            <option value="Cranberry Beans">Cranberry Beans</option>
+            <option value="Anasazi Beans">Anasazi Beans</option>
+            <option value="Dry Beans">Dry Beans</option>
+            <option value="Coconut">Coconut</option>
+            <option value="Almonds">Almonds</option>
+            <option value="Brazil Nuts">Brazil Nuts</option>
+            <option value="Pecans">Pecans</option>
+            <option value="Pistachios">Pistachios</option>
+            <option value="Macadamia Nuts">Macadamia Nuts</option>
+            <option value="Walnuts">Walnuts</option>
+            <option value="Peanuts">Peanuts</option>
+            <option value="Hemp Seeds">Hemp Seeds</option>
+            <option value="Flaxseeds">Flaxseeds</option>
+            <option value="Chia Seeds">Chia Seeds</option>
+            <option value="Sesame Seeds">Sesame Seeds</option>
+            <option value="Sunflower Seeds">Sunflower Seeds</option>
+            <option value="Pumpkin Seeds">Pumpkin Seeds</option>
+            <option value="Cacao">Cacao</option>
+            <option value="Cacao Nibs">Cacao Nibs</option>
+            <option value="Cocoa Powder">Cocoa Powder</option>
+            <option value="Cocoa Butter">Cocoa Butter</option>
+            <option value="Chocolate">Chocolate</option>
+            <option value="Dark Chocolate">Dark Chocolate</option>
+            <option value="Milk Chocolate">Milk Chocolate</option>
+            <option value="White Chocolate">White Chocolate</option>
+            <option value="Ice Cream">Ice Cream</option>
+            <option value="Yogurt">Yogurt</option>
+            <option value="Cheese">Cheese</option>
+            <option value="Butter">Butter</option>
+            <option value="Cream">Cream</option>
+            <option value="Sour Cream">Sour Cream</option>
+            <option value="Ricotta">Ricotta</option>
+            <option value="Cottage Cheese">Cottage Cheese</option>
+            <option value="Goat Cheese">Goat Cheese</option>
+            <option value="Feta Cheese">Feta Cheese</option>
+            <option value="Blue Cheese">Blue Cheese</option>
+            <option value="Parmesan">Parmesan</option>
+            <option value="Cheddar">Cheddar</option>
+            <option value="Swiss Cheese">Swiss Cheese</option>
+            <option value="Mozzarella">Mozzarella</option>
+            <option value="Brie">Brie</option>
+            <option value="Camembert">Camembert</option>
+            <option value="Gruyere">Gruyere</option>
+            <option value="Monterey Jack">Monterey Jack</option>
+            <option value="Provolone">Provolone</option>
+            <option value="Gouda">Gouda</option>
+            <option value="Havarti">Havarti</option>
+            <option value="Emmental">Emmental</option>
+            <option value="Paneer">Paneer</option>
+            <option value="Tofu">Tofu</option>
+            <option value="Tempeh">Tempeh</option>
+            <option value="Seitan">Seitan</option>
+            <option value="Miso">Miso</option>
+            <option value="Soy Sauce">Soy Sauce</option>
+            <option value="Fish Sauce">Fish Sauce</option>
+            <option value="Worcestershire Sauce">Worcestershire Sauce</option>
+            <option value="Vinegar">Vinegar</option>
+            <option value="Balsamic Vinegar">Balsamic Vinegar</option>
+            <option value="Red Wine Vinegar">Red Wine Vinegar</option>
+            <option value="White Wine Vinegar">White Wine Vinegar</option>
+            <option value="Rice Vinegar">Rice Vinegar</option>
+            <option value="Apple Cider Vinegar">Apple Cider Vinegar</option>
+            <option value="Coconut Vinegar">Coconut Vinegar</option>
+            <option value="Tamarind">Tamarind</option>
+            <option value="Curry Paste">Curry Paste</option>
+            <option value="Tomato Sauce">Tomato Sauce</option>
+            <option value="Ketchup">Ketchup</option>
+            <option value="Mustard">Mustard</option>
+            <option value="Mayonnaise">Mayonnaise</option>
+            <option value="Hot Sauce">Hot Sauce</option>
+            <option value="Barbecue Sauce">Barbecue Sauce</option>
+            <option value="Salad Dressing">Salad Dressing</option>
+            <option value="Pesto">Pesto</option>
+            <option value="Salsa">Salsa</option>
+            <option value="Guacamole">Guacamole</option>
+            <option value="Hummus">Hummus</option>
+            <option value="Tahini">Tahini</option>
+            <option value="Nut Butters">Nut Butters</option>
+            <option value="Peanut Butter">Peanut Butter</option>
+            <option value="Almond Butter">Almond Butter</option>
+            <option value="Cashew Butter">Cashew Butter</option>
+            <option value="Sunflower Seed Butter">Sunflower Seed Butter</option>
+            <option value="Hazelnut Butter">Hazelnut Butter</option>
+            <option value="Pistachio Butter">Pistachio Butter</option>
+            <option value="Walnut Butter">Walnut Butter</option>
+            <option value="Coconut Oil">Coconut Oil</option>
+            <option value="Olive Oil">Olive Oil</option>
+            <option value="Canola Oil">Canola Oil</option>
+            <option value="Sunflower Oil">Sunflower Oil</option>
+            <option value="Safflower Oil">Safflower Oil</option>
+            <option value="Peanut Oil">Peanut Oil</option>
+            <option value="Sesame Oil">Sesame Oil</option>
+            <option value="Avocado Oil">Avocado Oil</option>
+            <option value="Flaxseed Oil">Flaxseed Oil</option>
+            <option value="Hemp Oil">Hemp Oil</option>
+            <option value="Walnut Oil">Walnut Oil</option>
+            <option value="Macadamia Nut Oil">Macadamia Nut Oil</option>
+            <option value="Truffle Oil">Truffle Oil</option>
+            <option value="Pumpkin Seed Oil">Pumpkin Seed Oil</option>
+            <option value="Hazelnuts">Hazelnuts</option>
+            <option value="Hazel Oil">Hazel Oil</option>
+       
+        
+      
+        <!-- Add more options dynamically as needed -->
+    </select>
+
+    <button onclick="getFootprint()">Get Water Footprint</button>
+
+    <div id="result" class="result">
+        <p><strong>Water Footprint:</strong> <span id="waterFootprint">N/A</span></p>
+        <p><strong>Virtual Water Exported:</strong> <span id="virtualWater">N/A</span></p>
+        <p><strong>Annual Export (tons):</strong> <span id="annualExport">N/A</span></p>
+    </div>
+
+    <div class="chart-container">
+        <canvas id="waterFootprintChart"></canvas>
+    </div>
+
+    <script>
+        // Data from the Excel file
+        const cropData = {
+            'Rice': {
+                waterFootprint: 3500,
+                virtualWater: 112000000000,
+                annualExport: 37400000
+            },
+            'Cotton': {
+                waterFootprint: 20000,
+                virtualWater: 110000000000,
+                annualExport: 5500000
+            },
+            "Sugarcane": {
+    "waterFootprint": 1800,
+    "annualExport": 20000000,
+    "virtualWater": 36000000000
+  },
+  "Tea": {
+    "waterFootprint": 3500,
+    "annualExport": 250000,
+    "virtualWater": 8750000000
+  },
+  "Wheat": {
+    "waterFootprint": 1800,
+    "annualExport": 25000000,
+    "virtualWater": 45000000000
+  },
+  "Pulses": {
+    "waterFootprint": 1500,
+    "annualExport": 10000000,
+    "virtualWater": 15000000000
+  },
+  "Milk": {
+    "waterFootprint": 1000,
+    "annualExport": 10000000,
+    "virtualWater": 10000000000
+  },
+  "Mangoes": {
+    "waterFootprint": 560,
+    "annualExport": 400000,
+    "virtualWater": 2240000000
+  },
+  "Black Pepper": {
+    "waterFootprint": 4000,
+    "annualExport": 60000,
+    "virtualWater": 2400000000
+  },
+  "Soybean": {
+    "waterFootprint": 2500,
+    "annualExport": 10000000,
+    "virtualWater": 25000000000
+  },
+  "Barley": {
+    "waterFootprint": 1200,
+    "annualExport": 500000,
+    "virtualWater": 6000000000
+  },
+  "Almonds": {
+    "waterFootprint": 12000,
+    "annualExport": 50000,
+    "virtualWater": 6000000000
+  },
+  "Oranges": {
+    "waterFootprint": 560,
+    "annualExport": 300000,
+    "virtualWater": 1680000000
+  },
+  "Apples": {
+    "waterFootprint": 800,
+    "annualExport": 200000,
+    "virtualWater": 1600000000
+  },
+  "Peanuts": {
+    "waterFootprint": 4000,
+    "annualExport": 10000000,
+    "virtualWater": 40000000000
+  },
+  "Chickpeas": {
+    "waterFootprint": 2000,
+    "annualExport": 800000,
+    "virtualWater": 1600000000
+  },
+  "Cashews": {
+    "waterFootprint": 9000,
+    "annualExport": 60000,
+    "virtualWater": 5400000000
+  },
+  "Jute": {
+    "waterFootprint": 6000,
+    "annualExport": 100000,
+    "virtualWater": 6000000000
+  },
+  "Mustard Seeds": {
+    "waterFootprint": 1800,
+    "annualExport": 150000,
+    "virtualWater": 2700000000
+  },
+  "Cardamom": {
+    "waterFootprint": 3000,
+    "annualExport": 25000,
+    "virtualWater": 750000000
+  },
+  "Ginger": {
+    "waterFootprint": 2500,
+    "annualExport": 80000,
+    "virtualWater": 2000000000
+  },
+  "Turmeric": {
+    "waterFootprint": 1500,
+    "annualExport": 200000,
+    "virtualWater": 3000000000
+  },
+  "Coriander": {
+    "waterFootprint": 2000,
+    "annualExport": 90000,
+    "virtualWater": 1800000000
+  },
+  "Cloves": {
+    "waterFootprint": 5000,
+    "annualExport": 30000,
+    "virtualWater": 1500000000
+  },
+  "Vanilla": {
+    "waterFootprint": 7000,
+    "annualExport": 10000,
+    "virtualWater": 700000000
+  },
+  "Papaya": {
+    "waterFootprint": 600,
+    "annualExport": 50000,
+    "virtualWater": 300000000
+  },
+  "Pineapple": {
+    "waterFootprint": 800,
+    "annualExport": 60000,
+    "virtualWater": 480000000
+  },
+  "Guava": {
+    "waterFootprint": 700,
+    "annualExport": 40000,
+    "virtualWater": 280000000
+  },
+  "Brinjal": {
+    "waterFootprint": 400,
+    "annualExport": 30000,
+    "virtualWater": 120000000
+  },
+  "Tomatoes": {
+    "waterFootprint": 560,
+    "annualExport": 100000,
+    "virtualWater": 560000000
+  },
+  "Cauliflower": {
+    "waterFootprint": 450,
+    "annualExport": 20000,
+    "virtualWater": 90000000
+  },
+  "Spinach": {
+    "waterFootprint": 500,
+    "annualExport": 25000,
+    "virtualWater": 125000000
+  },
+  "Lettuce": {
+    "waterFootprint": 350,
+    "annualExport": 20000,
+    "virtualWater": 70000000
+  },
+  "Cucumbers": {
+    "waterFootprint": 350,
+    "annualExport": 20000,
+    "virtualWater": 70000000
+  },
+  "Potatoes": {
+    "waterFootprint": 250,
+    "annualExport": 200000,
+    "virtualWater": 500000000
+  },
+  "Onions": {
+    "waterFootprint": 600,
+    "annualExport": 150000,
+    "virtualWater": 900000000
+  },
+  "Carrots": {
+    "waterFootprint": 500,
+    "annualExport": 30000,
+    "virtualWater": 150000000
+  },
+  "Beetroot": {
+    "waterFootprint": 400,
+    "annualExport": 20000,
+    "virtualWater": 80000000
+  },
+  "Apples": {
+    "waterFootprint": 800,
+    "annualExport": 200000,
+    "virtualWater": 1600000000
+  },
+  "Pears": {
+    "waterFootprint": 750,
+    "annualExport": 50000,
+    "virtualWater": 375000000
+  },
+  "Peaches": {
+    "waterFootprint": 600,
+    "annualExport": 30000,
+    "virtualWater": 180000000
+  },
+  "Plums": {
+    "waterFootprint": 700,
+    "annualExport": 20000,
+    "virtualWater": 140000000
+  },
+  "Cherries": {
+    "waterFootprint": 1000,
+    "annualExport": 10000,
+    "virtualWater": 100000000
+  },
+  "Grapes": {
+    "waterFootprint": 560,
+    "annualExport": 100000,
+    "virtualWater": 560000000
+  },
+  "Dates": {
+    "waterFootprint": 1200,
+    "annualExport": 20000,
+    "virtualWater": 240000000
+  },
+  "Raisins": {
+    "waterFootprint": 1500,
+    "annualExport": 30000,
+    "virtualWater": 450000000
+  },
+  "Walnuts": {
+    "waterFootprint": 10000,
+    "annualExport": 20000,
+    "virtualWater": 2000000000
+  },
+  "Hazelnuts": {
+    "waterFootprint": 6000,
+    "annualExport": 15000,
+    "virtualWater": 900000000
+  },
+  "Pistachios": {
+    "waterFootprint": 10000,
+    "annualExport": 25000,
+    "virtualWater": 2500000000
+  },
+  "Sunflower Seeds": {
+    "waterFootprint": 1500,
+    "annualExport": 100000,
+    "virtualWater": 1500000000
+  },
+  "Safflower": {
+    "waterFootprint": 2000,
+    "annualExport": 50000,
+    "virtualWater": 1000000000
+  },
+  "Sesame Seeds": {
+    "waterFootprint": 1800,
+    "annualExport": 80000,
+    "virtualWater": 1440000000
+  },
+  "Flax Seeds": {
+    "waterFootprint": 2000,
+    "annualExport": 60000,
+    "virtualWater": 1200000000
+  },
+  "Chia Seeds": {
+    "waterFootprint": 3000,
+    "annualExport": 20000,
+    "virtualWater": 600000000
+  },
+  "Pumpkin Seeds": {
+    "waterFootprint": 1500,
+    "annualExport": 40000,
+    "virtualWater": 600000000
+  },
+  "Quinoa": {
+    "waterFootprint": 2000,
+    "annualExport": 30000,
+    "virtualWater": 600000000
+  },
+  "Oats": {
+    "waterFootprint": 1800,
+    "annualExport": 50000,
+    "virtualWater": 900000000
+  },
+  "Barley": {
+    "waterFootprint": 1200,
+    "annualExport": 70000,
+    "virtualWater": 840000000
+  },
+  "Rye": {
+    "waterFootprint": 1500,
+    "annualExport": 40000,
+    "virtualWater": 600000000
+  },
+  "Millets": {
+    "waterFootprint": 1200,
+    "annualExport": 30000,
+    "virtualWater": 360000000
+  },
+  "Sorghum": {
+    "waterFootprint": 1800,
+    "annualExport": 20000,
+    "virtualWater": 360000000
+  },
+  "Tapioca": {
+    "waterFootprint": 2000,
+    "annualExport": 15000,
+    "virtualWater": 300000000
+  },
+  "Sweet Potatoes": {
+    "waterFootprint": 500,
+    "annualExport": 10000,
+    "virtualWater": 50000000
+  },
+  "Yams": {
+    "waterFootprint": 1000,
+    "annualExport": 5000,
+    "virtualWater": 50000000
+  },
+  "Chili Peppers": {
+    "waterFootprint": 1500,
+    "annualExport": 100000,
+    "virtualWater": 1500000000
+  },
+  "Garlic": {
+    "waterFootprint": 600,
+    "annualExport": 20000,
+    "virtualWater": 120000000
+  },
+  "Onions": {
+    "waterFootprint": 600,
+    "annualExport": 200000,
+    "virtualWater": 1200000000
+  },
+  "Leeks": {
+    "waterFootprint": 400,
+    "annualExport": 10000,
+    "virtualWater": 40000000
+  },
+  "Celery": {
+    "waterFootprint": 500,
+    "annualExport": 5000,
+    "virtualWater": 25000000
+  },
+  "Mushrooms": {
+    "waterFootprint": 1000,
+    "annualExport": 20000,
+    "virtualWater": 200000000
+  },
+  "Asparagus": {
+    "waterFootprint": 1200,
+    "annualExport": 15000,
+    "virtualWater": 180000000
+  },
+  "Green Beans": {
+    "waterFootprint": 500,
+    "annualExport": 30000,
+    "virtualWater": 150000000
+  },
+  "Peas": {
+    "waterFootprint": 400,
+    "annualExport": 20000,
+    "virtualWater": 80000000
+  },
+  "Cabbage": {
+    "waterFootprint": 300,
+    "annualExport": 15000,
+    "virtualWater": 45000000
+  },
+  "Broccoli": {
+    "waterFootprint": 500,
+    "annualExport": 10000,
+    "virtualWater": 50000000
+  },
+  "Cauliflower": {
+    "waterFootprint": 450,
+    "annualExport": 15000,
+    "virtualWater": 67500000
+  },
+  "Kale": {
+    "waterFootprint": 400,
+    "annualExport": 5000,
+    "virtualWater": 20000000
+  },
+  "Spinach": {
+    "waterFootprint": 500,
+    "annualExport": 10000,
+    "virtualWater": 50000000
+  },
+  "Strawberries": {
+    "waterFootprint": 1000,
+    "annualExport": 20000,
+    "virtualWater": 200000000
+  },
+  "Raspberries": {
+    "waterFootprint": 1200,
+    "annualExport": 10000,
+    "virtualWater": 120000000
+  },
+  "Blueberries": {
+    "waterFootprint": 1500,
+    "annualExport": 5000,
+    "virtualWater": 75000000
+  },
+  "Cranberries": {
+    "waterFootprint": 1000,
+    "annualExport": 10000,
+    "virtualWater": 100000000
+  },
+  "Pine Nuts": {
+    "waterFootprint": 10000,
+    "annualExport": 5000,
+    "virtualWater": 500000000
+  },
+  "Almonds": {
+    "waterFootprint": 12000,
+    "annualExport": 20000,
+    "virtualWater": 2400000000
+  },
+  "Pecans": {
+    "waterFootprint": 9000,
+    "annualExport": 10000,
+    "virtualWater": 900000000
+  },
+  "Brazil Nuts": {
+    "waterFootprint": 10000,
+    "annualExport": 5000,
+    "virtualWater": 500000000
+  },
+  "Cashews": {
+    "waterFootprint": 9000,
+    "annualExport": 30000,
+    "virtualWater": 2700000000
+  },
+  "Pistachios": {
+    "waterFootprint": 10000,
+    "annualExport": 25000,
+    "virtualWater": 2500000000
+  },
+  "Macadamia Nuts": {
+    "waterFootprint": 12000,
+    "annualExport": 10000,
+    "virtualWater": 1200000000
+  },
+  "Hazelnuts": {
+    "waterFootprint": 6000,
+    "annualExport": 15000,
+    "virtualWater": 900000000
+  },
+  "Walnuts": {
+    "waterFootprint": 10000,
+    "annualExport": 20000,
+    "virtualWater": 2000000000
+  },
+  "Sesame Oil": {
+    "waterFootprint": 2000,
+    "annualExport": 10000,
+    "virtualWater": 200000000
+  },
+  "Sunflower Oil": {
+    "waterFootprint": 1500,
+    "annualExport": 50000,
+    "virtualWater": 750000000
+  },
+  "Soybean Oil": {
+    "waterFootprint": 2500,
+    "annualExport": 100000,
+    "virtualWater": 2500000000
+  },
+  "Palm Oil": {
+    "waterFootprint": 2000,
+    "annualExport": 50000,
+    "virtualWater": 1000000000
+  },
+  "Coconut Oil": {
+    "waterFootprint": 2500,
+    "annualExport": 30000,
+    "virtualWater": 750000000
+  },
+  "Olive Oil": {
+    "waterFootprint": 3000,
+    "annualExport": 20000,
+    "virtualWater": 600000000
+  },
+  "Canola Oil": {
+    "waterFootprint": 1800,
+    "annualExport": 40000,
+    "virtualWater": 720000000
+  },
+  "Corn": {
+    "waterFootprint": 900,
+    "annualExport": 100000,
+    "virtualWater": 900000000
+  },
+  "Wheat Flour": {
+    "waterFootprint": 1500,
+    "annualExport": 50000,
+    "virtualWater": 750000000
+  },
+  "Barley Malt": {
+    "waterFootprint": 1500,
+    "annualExport": 30000,
+    "virtualWater": 450000000
+  },
+  "Wheat Flour (2)": {
+    "waterFootprint": 1200,
+    "annualExport": 100000,
+    "virtualWater": 1200000000
+  },
+  "Maize Flour": {
+    "waterFootprint": 1000,
+    "annualExport": 50000,
+    "virtualWater": 500000000
+  },
+  "Sorghum Flour": {
+    "waterFootprint": 1200,
+    "annualExport": 25000,
+    "virtualWater": 300000000
+  },
+  "Rye Flour": {
+    "waterFootprint": 1500,
+    "annualExport": 10000,
+    "virtualWater": 150000000
+  },
+  "Oat Flour": {
+    "waterFootprint": 1800,
+    "annualExport": 20000,
+    "virtualWater": 360000000
+  },
+  "Chickpea Flour": {
+    "waterFootprint": 1000,
+    "annualExport": 15000,
+    "virtualWater": 150000000
+  },
+  "Pea Flour": {
+    "waterFootprint": 1200,
+    "annualExport": 10000,
+    "virtualWater": 120000000
+  },
+  "Lentil Flour": {
+    "waterFootprint": 1000,
+    "annualExport": 12000,
+    "virtualWater": 120000000
+  },
+  "Soy Flour": {
+    "waterFootprint": 1500,
+    "annualExport": 25000,
+    "virtualWater": 375000000
+  },
+  "Soybean Oil": {
+    "waterFootprint": 2000,
+    "annualExport": 80000,
+    "virtualWater": 1600000000
+  },
+  "Palm Oil": {
+    "waterFootprint": 1800,
+    "annualExport": 120000,
+    "virtualWater": 2160000000
+  },
+  "Sunflower Oil": {
+    "waterFootprint": 1500,
+    "annualExport": 70000,
+    "virtualWater": 1050000000
+  },
+  "Canola Oil": {
+    "waterFootprint": 1800,
+    "annualExport": 50000,
+    "virtualWater": 900000000
+  },
+  "Cottonseed Oil": {
+    "waterFootprint": 2000,
+    "annualExport": 60000,
+    "virtualWater": 1200000000
+  },
+  "Rapeseed Oil": {
+    "waterFootprint": 2000,
+    "annualExport": 40000,
+    "virtualWater": 800000000
+  },
+  "Sesame Oil": {
+    "waterFootprint": 2200,
+    "annualExport": 25000,
+    "virtualWater": 550000000
+  },
+  "Almond Oil": {
+    "waterFootprint": 10000,
+    "annualExport": 15000,
+    "virtualWater": 1500000000
+  },
+  "Walnut Oil": {
+    "waterFootprint": 10000,
+    "annualExport": 10000,
+    "virtualWater": 1000000000
+  },
+  "Hazelnut Oil": {
+    "waterFootprint": 6000,
+    "annualExport": 12000,
+    "virtualWater": 720000000
+  },
+  "Pistachio Oil": {
+    "waterFootprint": 10000,
+    "annualExport": 8000,
+    "virtualWater": 800000000
+  },
+  "Flaxseed Oil": {
+    "waterFootprint": 2500,
+    "annualExport": 20000,
+    "virtualWater": 500000000
+  },
+  "Chia Oil": {
+    "waterFootprint": 3000,
+    "annualExport": 10000,
+    "virtualWater": 300000000
+  },
+  "Pumpkin Seed Oil": {
+    "waterFootprint": 2000,
+    "annualExport": 8000,
+    "virtualWater": 160000000
+  },
+  "Safflower Oil": {
+    "waterFootprint": 2200,
+    "annualExport": 15000,
+    "virtualWater": 330000000
+  },
+  "Grapeseed Oil": {
+    "waterFootprint": 2500,
+    "annualExport": 10000,
+    "virtualWater": 250000000
+  },
+  "Coconut Oil": {
+    "waterFootprint": 1500,
+    "annualExport": 100000,
+    "virtualWater": 1500000000
+  },
+  "Olive Oil": {
+    "waterFootprint": 2500,
+    "annualExport": 50000,
+    "virtualWater": 1250000000
+  },
+  "Avocado Oil": {
+    "waterFootprint": 3000,
+    "annualExport": 5000,
+    "virtualWater": 150000000
+  },
+  "Tea": {
+    "waterFootprint": 3500,
+    "annualExport": 250000,
+    "virtualWater": 8750000000
+  },
+  "Coffee": {
+    "waterFootprint": 18000,
+    "annualExport": 350000,
+    "virtualWater": 6300000000
+  },
+  "Cacao": {
+    "waterFootprint": 17000,
+    "annualExport": 30000,
+    "virtualWater": 5100000000
+  },
+  "Black Pepper": {
+    "waterFootprint": 2000,
+    "annualExport": 50000,
+    "virtualWater": 1000000000
+  },
+  "Cinnamon": {
+    "waterFootprint": 3000,
+    "annualExport": 20000,
+    "virtualWater": 600000000
+  },
+  "Cloves": {
+    "waterFootprint": 4000,
+    "annualExport": 10000,
+    "virtualWater": 400000000
+  },
+  "Nutmeg": {
+    "waterFootprint": 2500,
+    "annualExport": 5000,
+    "virtualWater": 125000000
+  },
+  "Cardamom": {
+    "waterFootprint": 3000,
+    "annualExport": 8000,
+    "virtualWater": 240000000
+  },
+  "Turmeric": {
+    "waterFootprint": 2500,
+    "annualExport": 30000,
+    "virtualWater": 750000000
+  },
+  "Ginger": {
+    "waterFootprint": 2200,
+    "annualExport": 25000,
+    "virtualWater": 550000000
+  },
+  "Garlic Powder": {
+    "waterFootprint": 1500,
+    "annualExport": 20000,
+    "virtualWater": 300000000
+  },
+  "Onion Powder": {
+    "waterFootprint": 1800,
+    "annualExport": 15000,
+    "virtualWater": 270000000
+  },
+  "Mustard Powder": {
+    "waterFootprint": 1600,
+    "annualExport": 10000,
+    "virtualWater": 160000000
+  },
+  "Curry Powder": {
+    "waterFootprint": 1800,
+    "annualExport": 8000,
+    "virtualWater": 144000000
+  },
+  "Paprika": {
+    "waterFootprint": 2000,
+    "annualExport": 6000,
+    "virtualWater": 120000000
+  },
+  "Chili Powder": {
+    "waterFootprint": 1900,
+    "annualExport": 12000,
+    "virtualWater": 228000000
+  },
+  "Vanilla Beans": {
+    "waterFootprint": 5000,
+    "annualExport": 2000,
+    "virtualWater": 100000000
+  },
+  "Basil": {
+    "waterFootprint": 1500,
+    "annualExport": 10000,
+    "virtualWater": 150000000
+  },
+  "Oregano": {
+    "waterFootprint": 1800,
+    "annualExport": 5000,
+    "virtualWater": 90000000
+  },
+  "Rosemary": {
+    "waterFootprint": 2000,
+    "annualExport": 4000,
+    "virtualWater": 80000000
+  },
+  "Thyme": {
+    "waterFootprint": 2000,
+    "annualExport": 3000,
+    "virtualWater": 60000000
+  },
+  "Coffee Beans": {
+    "waterFootprint": 18000,
+    "annualExport": 200000,
+    "virtualWater": 3600000000
+  },
+  "Cocoa Beans": {
+    "waterFootprint": 17000,
+    "annualExport": 50000,
+    "virtualWater": 850000000
+  },
+  "Tea Leaves": {
+    "waterFootprint": 3500,
+    "annualExport": 150000,
+    "virtualWater": 525000000
+  },
+  "Poppy Seeds": {
+    "waterFootprint": 2500,
+    "annualExport": 10000,
+    "virtualWater": 250000000
+  },
+  "Sesame Seeds": {
+    "waterFootprint": 2200,
+    "annualExport": 20000,
+    "virtualWater": 440000000
+  },
+  "Sunflower Seeds": {
+    "waterFootprint": 2000,
+    "annualExport": 30000,
+    "virtualWater": 600000000
+  },
+
+  "Coffee": {
+    "waterFootprint": 18000,
+    "annualExport": 50000000,
+    "virtualWater": 900000000000
+  },
+  "Tea": {
+    "waterFootprint": 4000,
+    "annualExport": 30000000,
+    "virtualWater": 120000000000
+  },
+  "Cocoa": {
+    "waterFootprint": 27000,
+    "annualExport": 15000000,
+    "virtualWater": 405000000000
+  },
+  "Vanilla": {
+    "waterFootprint": 40000,
+    "annualExport": 2000,
+    "virtualWater": 8000000000
+  },
+  "Cinnamon": {
+    "waterFootprint": 20000,
+    "annualExport": 1000,
+    "virtualWater": 200000000
+  },
+  "Black Pepper": {
+    "waterFootprint": 15000,
+    "annualExport": 1200,
+    "virtualWater": 180000000
+  },
+  "Ginger": {
+    "waterFootprint": 12000,
+    "annualExport": 8000000,
+    "virtualWater": 9600000000
+  },
+  "Turmeric": {
+    "waterFootprint": 10000,
+    "annualExport": 4000000,
+    "virtualWater": 4000000000
+  },
+  "Cardamom": {
+    "waterFootprint": 30000,
+    "annualExport": 10000,
+    "virtualWater": 3000000000
+  },
+  "Cloves": {
+    "waterFootprint": 25000,
+    "annualExport": 5000,
+    "virtualWater": 1250000000
+  },
+  "Nutmeg": {
+    "waterFootprint": 28000,
+    "annualExport": 2000,
+    "virtualWater": 560000000
+  },
+  "Mace": {
+    "waterFootprint": 35000,
+    "annualExport": 500,
+    "virtualWater": 175000000
+  },
+  "Saffron": {
+    "waterFootprint": 50000,
+    "annualExport": 200,
+    "virtualWater": 100000000
+  },
+  "Dill Seeds": {
+    "waterFootprint": 15000,
+    "annualExport": 300,
+    "virtualWater": 45000000
+  },
+  "Fennel Seeds": {
+    "waterFootprint": 14000,
+    "annualExport": 400,
+    "virtualWater": 56000000
+  },
+  "Anise Seeds": {
+    "waterFootprint": 16000,
+    "annualExport": 250,
+    "virtualWater": 40000000
+  },
+  "Caraway Seeds": {
+    "waterFootprint": 18000,
+    "annualExport": 150,
+    "virtualWater": 27000000
+  },
+  "Cumin Seeds": {
+    "waterFootprint": 20000,
+    "annualExport": 200,
+    "virtualWater": 40000000
+  },
+  "Coriander Seeds": {
+    "waterFootprint": 22000,
+    "annualExport": 180,
+    "virtualWater": 39600000
+  },
+  "Paprika": {
+    "waterFootprint": 8000,
+    "annualExport": 1000,
+    "virtualWater": 80000000
+  },
+  "Chili Powder": {
+    "waterFootprint": 7000,
+    "annualExport": 1200,
+    "virtualWater": 84000000
+  },
+  "Mustard Powder": {
+    "waterFootprint": 12000,
+    "annualExport": 500,
+    "virtualWater": 60000000
+  },
+  "Curry Powder": {
+    "waterFootprint": 15000,
+    "annualExport": 300,
+    "virtualWater": 45000000
+  },
+  "Garam Masala": {
+    "waterFootprint": 18000,
+    "annualExport": 250,
+    "virtualWater": 45000000
+  },
+  "Allspice": {
+    "waterFootprint": 20000,
+    "annualExport": 150,
+    "virtualWater": 30000000
+  },
+  "Nut Butters": {
+    "waterFootprint": 10000,
+    "annualExport": 50000,
+    "virtualWater": 500000000
+  },
+  "Almond Butter": {
+    "waterFootprint": 12000,
+    "annualExport": 30000,
+    "virtualWater": 360000000
+  },
+  "Peanut Butter": {
+    "waterFootprint": 6000,
+    "annualExport": 40000,
+    "virtualWater": 240000000
+  },
+  "Cashew Butter": {
+    "waterFootprint": 9000,
+    "annualExport": 25000,
+    "virtualWater": 225000000
+  },
+  "Sunflower Seed Butter": {
+    "waterFootprint": 8000,
+    "annualExport": 20000,
+    "virtualWater": 160000000
+  },
+  "Hazelnut Butter": {
+    "waterFootprint": 7500,
+    "annualExport": 15000,
+    "virtualWater": 112500000
+  },
+  "Coconut Oil": {
+    "waterFootprint": 6000,
+    "annualExport": 200000,
+    "virtualWater": 1200000000
+  },
+  "Olive Oil": {
+    "waterFootprint": 4000,
+    "annualExport": 150000,
+    "virtualWater": 600000000
+  },
+  "Grapeseed Oil": {
+    "waterFootprint": 3000,
+    "annualExport": 30000,
+    "virtualWater": 90000000
+  },
+  "Canola Oil": {
+    "waterFootprint": 5000,
+    "annualExport": 100000,
+    "virtualWater": 500000000
+  },
+  "Soybean Oil": {
+    "waterFootprint": 3500,
+    "annualExport": 300000,
+    "virtualWater": 1050000000
+  },
+  "Sunflower Oil": {
+    "waterFootprint": 4000,
+    "annualExport": 200000,
+    "virtualWater": 800000000
+  },
+  "Palm Oil": {
+    "waterFootprint": 2500,
+    "annualExport": 300000,
+    "virtualWater": 750000000
+  },
+  "Sesame Oil": {
+    "waterFootprint": 3500,
+    "annualExport": 50000,
+    "virtualWater": 175000000
+  },
+  "Avocado Oil": {
+    "waterFootprint": 2500,
+    "annualExport": 40000,
+    "virtualWater": 100000000
+  },
+  "Rice Bran Oil": {
+    "waterFootprint": 2000,
+    "annualExport": 20000,
+    "virtualWater": 40000000
+  },
+  "Walnut Oil": {
+    "waterFootprint": 5000,
+    "annualExport": 10000,
+    "virtualWater": 50000000
+  },
+  "Safflower Oil": {
+    "waterFootprint": 3500,
+    "annualExport": 15000,
+    "virtualWater": 52500000
+  },
+  "Tallow": {
+    "waterFootprint": 4000,
+    "annualExport": 5000,
+    "virtualWater": 200000000
+  },
+  "Lard": {
+    "waterFootprint": 5000,
+    "annualExport": 3000,
+    "virtualWater": 150000000
+  },
+  "Beef": {
+    "waterFootprint": 15000,
+    "annualExport": 60000000,
+    "virtualWater": 900000000000
+  },
+  "Turkey": {
+    "waterFootprint": 5500,
+    "annualExport": 500000,
+    "virtualWater": 2750000000
+  },
+  "Duck": {
+    "waterFootprint": 8000,
+    "annualExport": 200000,
+    "virtualWater": 1600000000
+  },
+  "Goose": {
+    "waterFootprint": 12000,
+    "annualExport": 100000,
+    "virtualWater": 1200000000
+  },
+  "Salmon": {
+    "waterFootprint": 1800,
+    "annualExport": 20000000,
+    "virtualWater": 3600000000
+  },
+  "Tuna": {
+    "waterFootprint": 2000,
+    "annualExport": 15000000,
+    "virtualWater": 3000000000
+  },
+  "Shrimp": {
+    "waterFootprint": 3000,
+    "annualExport": 8000000,
+    "virtualWater": 2400000000
+  },
+  "Lobster": {
+    "waterFootprint": 5000,
+    "annualExport": 200000,
+    "virtualWater": 1000000000
+  },
+  "Crab": {
+    "waterFootprint": 4500,
+    "annualExport": 300000,
+    "virtualWater": 1350000000
+  },
+  "Oysters": {
+    "waterFootprint": 1000,
+    "annualExport": 150000,
+    "virtualWater": 150000000
+  },
+  "Clams": {
+    "waterFootprint": 1200,
+    "annualExport": 100000,
+    "virtualWater": 120000000
+  },
+  "Mussels": {
+    "waterFootprint": 1500,
+    "annualExport": 80000,
+    "virtualWater": 120000000
+  },
+  "Scallops": {
+    "waterFootprint": 2000,
+    "annualExport": 60000,
+    "virtualWater": 120000000
+  },
+  "Octopus": {
+    "waterFootprint": 2500,
+    "annualExport": 40000,
+    "virtualWater": 100000000
+  },
+  "Squid": {
+    "waterFootprint": 2000,
+    "annualExport": 30000,
+    "virtualWater": 60000000
+  },
+  "Cuttlefish": {
+    "waterFootprint": 2500,
+    "annualExport": 20000,
+    "virtualWater": 50000000
+  },
+  "Seaweed": {
+    "waterFootprint": 1000,
+    "annualExport": 200000,
+    "virtualWater": 200000000
+  },
+  "Kelp": {
+    "waterFootprint": 800,
+    "annualExport": 150000,
+    "virtualWater": 120000000
+  },
+  "Spirulina": {
+    "waterFootprint": 2500,
+    "annualExport": 50000,
+    "virtualWater": 125000000
+  },
+  "Chlorella": {
+    "waterFootprint": 3000,
+    "annualExport": 30000,
+    "virtualWater": 90000000
+  },
+  "Moringa": {
+    "waterFootprint": 1500,
+    "annualExport": 20000,
+    "virtualWater": 30000000
+  },
+  "Aloe Vera": {
+    "waterFootprint": 1000,
+    "annualExport": 15000,
+    "virtualWater": 15000000
+  },
+  "Baobab": {
+    "waterFootprint": 500,
+    "annualExport": 10000,
+    "virtualWater": 5000000
+  },
+  "Goji Berries": {
+    "waterFootprint": 2000,
+    "annualExport": 5000,
+    "virtualWater": 100000000
+  },
+  "Acai Berries": {
+    "waterFootprint": 3000,
+    "annualExport": 3000,
+    "virtualWater": 90000000
+  },
+  "Passion Fruit": {
+    "waterFootprint": 1500,
+    "annualExport": 2000,
+    "virtualWater": 30000000
+  },
+  "Pomegranate Juice": {
+    "waterFootprint": 3000,
+    "annualExport": 1000,
+    "virtualWater": 30000000
+  },
+  "Cranberry Juice": {
+    "waterFootprint": 2000,
+    "annualExport": 50000,
+    "virtualWater": 100000000
+  },
+  "Grape Juice": {
+    "waterFootprint": 1800,
+    "annualExport": 70000,
+    "virtualWater": 126000000
+  },
+  "Pineapple Juice": {
+    "waterFootprint": 2500,
+    "annualExport": 30000,
+    "virtualWater": 75000000
+  },
+  "Mango Juice": {
+    "waterFootprint": 2000,
+    "annualExport": 40000,
+    "virtualWater": 80000000
+  },
+  "Pomegranate Juice": {
+    "waterFootprint": 3000,
+    "annualExport": 25000,
+    "virtualWater": 75000000
+  },
+  "Prickly Pear Juice": {
+    "waterFootprint": 2500,
+    "annualExport": 10000,
+    "virtualWater": 25000000
+  },
+  "Lemon Juice": {
+    "waterFootprint": 1500,
+    "annualExport": 15000,
+    "virtualWater": 22500000
+  },
+  "Lime Juice": {
+    "waterFootprint": 1200,
+    "annualExport": 12000,
+    "virtualWater": 14400000
+  },
+  "Apple Sauce": {
+    "waterFootprint": 1000,
+    "annualExport": 10000,
+    "virtualWater": 10000000
+  },
+  "Fruit Purees": {
+    "waterFootprint": 1500,
+    "annualExport": 15000,
+    "virtualWater": 22500000
+  },
+  "Jam (Fruit)": {
+    "waterFootprint": 1500,
+    "annualExport": 20000,
+    "virtualWater": 30000000
+  },
+  "Honey": {
+    "waterFootprint": 3000,
+    "annualExport": 40000,
+    "virtualWater": 120000000
+  },
+  "Maple Syrup": {
+    "waterFootprint": 1200,
+    "annualExport": 25000,
+    "virtualWater": 30000000
+  },
+  "Molasses": {
+    "waterFootprint": 1800,
+    "annualExport": 10000,
+    "virtualWater": 18000000
+  },
+  "Agave Syrup": {
+    "waterFootprint": 2500,
+    "annualExport": 8000,
+    "virtualWater": 20000000
+  },
+  "Soy Sauce": {
+    "waterFootprint": 2000,
+    "annualExport": 30000,
+    "virtualWater": 60000000
+  },
+  "Vinegar (White)": {
+    "waterFootprint": 1000,
+    "annualExport": 15000,
+    "virtualWater": 15000000
+  },
+  "Balsamic Vinegar": {
+    "waterFootprint": 2500,
+    "annualExport": 5000,
+    "virtualWater": 12500000
+  },
+  "Worcestershire Sauce": {
+    "waterFootprint": 1500,
+    "annualExport": 10000,
+    "virtualWater": 15000000
+  },
+  "Hot Sauce": {
+    "waterFootprint": 2000,
+    "annualExport": 8000,
+    "virtualWater": 16000000
+  },
+  "Mustard": {
+    "waterFootprint": 1800,
+    "annualExport": 20000,
+    "virtualWater": 36000000
+  },
+  "Ketchup": {
+    "waterFootprint": 2000,
+    "annualExport": 25000,
+    "virtualWater": 50000000
+  },
+  "Mayonnaise": {
+    "waterFootprint": 3000,
+    "annualExport": 15000,
+    "virtualWater": 45000000
+  },
+  "Peanut Butter": {
+    "waterFootprint": 2500,
+    "annualExport": 25000,
+    "virtualWater": 62500000
+  },
+  "Nutella": {
+    "waterFootprint": 2800,
+    "annualExport": 10000,
+    "virtualWater": 28000000
+  },
+  "Almond Butter": {
+    "waterFootprint": 3000,
+    "annualExport": 5000,
+    "virtualWater": 15000000
+  },
+  "Pumpkin Seed Oil": {
+    "waterFootprint": 3000,
+    "annualExport": 6000,
+    "virtualWater": 180000000
+  },
+  "Hemp Seed Oil": {
+    "waterFootprint": 3200,
+    "annualExport": 4000,
+    "virtualWater": 128000000
+  },
+  "Olive Oil (Extra Virgin)": {
+    "waterFootprint": 4500,
+    "annualExport": 150000,
+    "virtualWater": 675000000
+  },
+  "Coconut Oil": {
+    "waterFootprint": 2800,
+    "annualExport": 200000,
+    "virtualWater": 560000000
+  },
+  "Canola Oil": {
+    "waterFootprint": 3000,
+    "annualExport": 100000,
+    "virtualWater": 300000000
+  },
+  "Corn Oil": {
+    "waterFootprint": 2500,
+    "annualExport": 150000,
+    "virtualWater": 375000000
+  },
+  "Soybean Oil": {
+    "waterFootprint": 3000,
+    "annualExport": 500000,
+    "virtualWater": 1500000000
+  },
+  "Cottonseed Oil": {
+    "waterFootprint": 2500,
+    "annualExport": 50000,
+    "virtualWater": 125000000
+  },
+  "Grape Oil": {
+    "waterFootprint": 3000,
+    "annualExport": 20000,
+    "virtualWater": 60000000
+  },
+  "Macadamia Oil": {
+    "waterFootprint": 4000,
+    "annualExport": 8000,
+    "virtualWater": 320000000
+  },
+  "Poppy Seed Oil": {
+    "waterFootprint": 3500,
+    "annualExport": 5000,
+    "virtualWater": 175000000
+  },
+  "Saffron": {
+    "waterFootprint": 15000,
+    "annualExport": 300,
+    "virtualWater": 45000000
+  },
+  "Vanilla": {
+    "waterFootprint": 10000,
+    "annualExport": 500,
+    "virtualWater": 50000000
+  },
+  "Cocoa Beans": {
+    "waterFootprint": 24000,
+    "annualExport": 40000000,
+    "virtualWater": 960000000000
+  },
+  "Coffee Beans": {
+    "waterFootprint": 18000,
+    "annualExport": 100000000,
+    "virtualWater": 1800000000000
+  },
+  "Tea Leaves": {
+    "waterFootprint": 7000,
+    "annualExport": 10000000,
+    "virtualWater": 7000000000
+  },
+  "Peppermint Oil": {
+    "waterFootprint": 2500,
+    "annualExport": 20000,
+    "virtualWater": 50000000
+  },
+  "Lavender Oil": {
+    "waterFootprint": 3000,
+    "annualExport": 10000,
+    "virtualWater": 30000000
+  },
+  "Eucalyptus Oil": {
+    "waterFootprint": 4000,
+    "annualExport": 15000,
+    "virtualWater": 60000000
+  },
+  "Tea Tree Oil": {
+    "waterFootprint": 3500,
+    "annualExport": 5000,
+    "virtualWater": 175000000
+  },
+  "Bergamot Oil": {
+    "waterFootprint": 3000,
+    "annualExport": 4000,
+    "virtualWater": 120000000
+  },
+  "Frankincense Oil": {
+    "waterFootprint": 8000,
+    "annualExport": 2000,
+    "virtualWater": 160000000
+  },
+  "Myrrh Oil": {
+    "waterFootprint": 10000,
+    "annualExport": 1000,
+    "virtualWater": 100000000
+  },
+  "Cinnamon": {
+    "waterFootprint": 10000,
+    "annualExport": 500,
+    "virtualWater": 50000000
+  },
+  "Cloves": {
+    "waterFootprint": 8000,
+    "annualExport": 1000,
+    "virtualWater": 80000000
+  },
+  "Garlic": {
+    "waterFootprint": 6000,
+    "annualExport": 1000,
+    "virtualWater": 60000000
+  },
+  "Onions": {
+    "waterFootprint": 1000,
+    "annualExport": 40000000,
+    "virtualWater": 4000000000
+  },
+  "Potatoes": {
+    "waterFootprint": 500,
+    "annualExport": 50000000,
+    "virtualWater": 2500000000
+  },
+  "Sweet Potatoes": {
+    "waterFootprint": 800,
+    "annualExport": 5000000,
+    "virtualWater": 400000000
+  },
+  "Carrots": {
+    "waterFootprint": 600,
+    "annualExport": 5000000,
+    "virtualWater": 300000000
+  },
+  "Beets": {
+    "waterFootprint": 700,
+    "annualExport": 2000000,
+    "virtualWater": 140000000
+  },
+  "Spinach": {
+    "waterFootprint": 1000,
+    "annualExport": 3000000,
+    "virtualWater": 300000000
+  },
+  "Kale": {
+    "waterFootprint": 1200,
+    "annualExport": 2000000,
+    "virtualWater": 240000000
+  },
+  "Lettuce": {
+    "waterFootprint": 700,
+    "annualExport": 10000000,
+    "virtualWater": 700000000
+  },
+  "Cabbage": {
+    "waterFootprint": 800,
+    "annualExport": 5000000,
+    "virtualWater": 400000000
+  },
+  "Cauliflower": {
+    "waterFootprint": 900,
+    "annualExport": 3000000,
+    "virtualWater": 270000000
+  },
+  "Broccoli": {
+    "waterFootprint": 1200,
+    "annualExport": 1500000,
+    "virtualWater": 180000000
+  },
+  "Green Beans": {
+    "waterFootprint": 1000,
+    "annualExport": 2000000,
+    "virtualWater": 200000000
+  },
+  "Peas": {
+    "waterFootprint": 800,
+    "annualExport": 4000000,
+    "virtualWater": 320000000
+  },
+  "Corn (Maize)": {
+    "waterFootprint": 900,
+    "annualExport": 150000000,
+    "virtualWater": 135000000000
+  },
+  "Soybeans": {
+    "waterFootprint": 2000,
+    "annualExport": 100000000,
+    "virtualWater": 200000000000
+  },
+  "Sunflower Seeds": {
+    "waterFootprint": 1500,
+    "annualExport": 50000000,
+    "virtualWater": 75000000000
+  },
+  "Sesame Seeds": {
+    "waterFootprint": 2500,
+    "annualExport": 20000000,
+    "virtualWater": 50000000000
+  },
+  "Flaxseeds": {
+    "waterFootprint": 1800,
+    "annualExport": 10000000,
+    "virtualWater": 18000000000
+  },
+  "Chia Seeds": {
+    "waterFootprint": 3000,
+    "annualExport": 5000000,
+    "virtualWater": 15000000000
+  },
+  "Quinoa": {
+    "waterFootprint": 2500,
+    "annualExport": 10000000,
+    "virtualWater": 2500000000
+  },
+  "Millet": {
+    "waterFootprint": 1800,
+    "annualExport": 20000000,
+    "virtualWater": 3600000000
+  },
+  "Barley": {
+    "waterFootprint": 1500,
+    "annualExport": 100000000,
+    "virtualWater": 15000000000
+  },
+  "Oats": {
+    "waterFootprint": 1200,
+    "annualExport": 50000000,
+    "virtualWater": 6000000000
+  },
+  "Rye": {
+    "waterFootprint": 1400,
+    "annualExport": 20000000,
+    "virtualWater": 2800000000
+  },
+  "Wheat": {
+    "waterFootprint": 1800,
+    "annualExport": 300000000,
+    "virtualWater": 54000000000
+  },
+  "Rice": {
+    "waterFootprint": 3000,
+    "annualExport": 400000000,
+    "virtualWater": 120000000000
+  },
+  "Sugarcane": {
+    "waterFootprint": 1200,
+    "annualExport": 50000000,
+    "virtualWater": 60000000000
+  },
+  "Sugar Beet": {
+    "waterFootprint": 1500,
+    "annualExport": 100000000,
+    "virtualWater": 15000000000
+  },
+  "Cotton": {
+    "waterFootprint": 10000,
+    "annualExport": 300000000,
+    "virtualWater": 300000000000
+  },
+  "Tobacco": {
+    "waterFootprint": 7000,
+    "annualExport": 50000000,
+    "virtualWater": 35000000000
+  },
+  "Rubber": {
+    "waterFootprint": 5000,
+    "annualExport": 8000,
+    "virtualWater": 40000000
+  },
+  "Coffee Powder": {
+    "waterFootprint": 18000,
+    "annualExport": 80000000,
+    "virtualWater": 144000000000
+  },
+  "Cocoa Powder": {
+    "waterFootprint": 24000,
+    "annualExport": 20000000,
+    "virtualWater": 48000000000
+  },
+  "Tea Powder": {
+    "waterFootprint": 7000,
+    "annualExport": 5000000,
+    "virtualWater": 3500000000
+  },
+  "Instant Coffee": {
+    "waterFootprint": 20000,
+    "annualExport": 10000000,
+    "virtualWater": 20000000000
+  },
+  "Instant Tea": {
+    "waterFootprint": 8000,
+    "annualExport": 5000000,
+    "virtualWater": 4000000000
+  },
+  "Fruit Drinks": {
+    "waterFootprint": 2500,
+    "annualExport": 50000,
+    "virtualWater": 1250000000
+  },
+  "Soft Drinks": {
+    "waterFootprint": 2000,
+    "annualExport": 1000000,
+    "virtualWater": 2000000000
+  },
+  "Bottled Water": {
+    "waterFootprint": 500,
+    "annualExport": 2000000,
+    "virtualWater": 1000000000
+  },
+  "Sports Drinks": {
+    "waterFootprint": 1500,
+    "annualExport": 30000,
+    "virtualWater": 450000000
+  },
+  "Energy Drinks": {
+    "waterFootprint": 1800,
+    "annualExport": 20000,
+    "virtualWater": 360000000
+  },
+  "Alcoholic Beverages": {
+    "waterFootprint": 3000,
+    "annualExport": 50000,
+    "virtualWater": 1500000000
+  },
+  "Beer": {
+    "waterFootprint": 2500,
+    "annualExport": 80000,
+    "virtualWater": 2000000000
+  },
+  "Wine": {
+    "waterFootprint": 4000,
+    "annualExport": 60000,
+    "virtualWater": 2400000000
+  },
+  "Spirits": {
+    "waterFootprint": 5000,
+    "annualExport": 20000,
+    "virtualWater": 1000000000
+  },
+  "Liqueurs": {
+    "waterFootprint": 3500,
+    "annualExport": 10000,
+    "virtualWater": 350000000
+  },
+  "Cider": {
+    "waterFootprint": 3000,
+    "annualExport": 15000,
+    "virtualWater": 450000000
+  },
+  "Distilled Spirits": {
+    "waterFootprint": 4500,
+    "annualExport": 8000,
+    "virtualWater": 360000000
+  },
+  "Kombucha": {
+    "waterFootprint": 2500,
+    "annualExport": 5000,
+    "virtualWater": 125000000
+  },
+  "Sauerkraut": {
+    "waterFootprint": 1000,
+    "annualExport": 3000,
+    "virtualWater": 30000000
+  },
+  "Pickles": {
+    "waterFootprint": 1500,
+    "annualExport": 7000,
+    "virtualWater": 105000000
+  },
+  "Kimchi": {
+    "waterFootprint": 1200,
+    "annualExport": 2000,
+    "virtualWater": 24000000
+  },
+  "Soya Milk": {
+    "waterFootprint": 1800,
+    "annualExport": 10000,
+    "virtualWater": 180000000
+  },
+  "Almond Milk": {
+    "waterFootprint": 2500,
+    "annualExport": 5000,
+    "virtualWater": 125000000
+  },
+  "Rice Milk": {
+    "waterFootprint": 1500,
+    "annualExport": 8000,
+    "virtualWater": 120000000
+  },
+  "Coconut Milk": {
+    "waterFootprint": 2200,
+    "annualExport": 6000,
+    "virtualWater": 132000000
+  },
+  "Hemp Milk": {
+    "waterFootprint": 3000,
+    "annualExport": 2000,
+    "virtualWater": 60000000
+  },
+  "Oat Milk": {
+    "waterFootprint": 2000,
+    "annualExport": 4000,
+    "virtualWater": 80000000
+  },
+  "Cashew Milk": {
+    "waterFootprint": 3500,
+    "annualExport": 1500,
+    "virtualWater": 52500000
+  },
+  "Protein Powder": {
+    "waterFootprint": 2500,
+    "annualExport": 30000,
+    "virtualWater": 750000000
+  },
+  "Collagen Powder": {
+    "waterFootprint": 3000,
+    "annualExport": 10000,
+    "virtualWater": 300000000
+  },
+  "Whey Powder": {
+    "waterFootprint": 4000,
+    "annualExport": 20000,
+    "virtualWater": 800000000
+  },
+  "Casein Powder": {
+    "waterFootprint": 3500,
+    "annualExport": 15000,
+    "virtualWater": 525000000
+  },
+  "Plant-Based Protein": {
+    "waterFootprint": 2800,
+    "annualExport": 12000,
+    "virtualWater": 336000000
+  },
+  "Hemp Protein Powder": {
+    "waterFootprint": 3000,
+    "annualExport": 5000,
+    "virtualWater": 150000000
+  },
+  "Brown Rice Protein": {
+    "waterFootprint": 2800,
+    "annualExport": 4000,
+    "virtualWater": 112000000
+  },
+  "Pumpkin Seed Protein": {
+    "waterFootprint": 3500,
+    "annualExport": 3000,
+    "virtualWater": 105000000
+  },
+  "Sunflower Protein": {
+    "waterFootprint": 2200,
+    "annualExport": 6000,
+    "virtualWater": 132000000
+  },
+  "Soy Lecithin": {
+    "waterFootprint": 1800,
+    "annualExport": 10000,
+    "virtualWater": 180000000
+  },
+  "Yeast Extract": {
+    "waterFootprint": 2000,
+    "annualExport": 8000,
+    "virtualWater": 160000000
+  },
+  "Malt Extract": {
+    "waterFootprint": 1500,
+    "annualExport": 12000,
+    "virtualWater": 180000000
+  },
+  "Starch": {
+    "waterFootprint": 1200,
+    "annualExport": 50000,
+    "virtualWater": 600000000
+  },
+  "Gluten": {
+    "waterFootprint": 1000,
+    "annualExport": 20000,
+    "virtualWater": 200000000
+  },
+  "Cellulose": {
+    "waterFootprint": 1500,
+    "annualExport": 15000,
+    "virtualWater": 225000000
+  },
+  "Gums": {
+    "waterFootprint": 2000,
+    "annualExport": 10000,
+    "virtualWater": 200000000
+  },
+  "Emulsifiers": {
+    "waterFootprint": 1800,
+    "annualExport": 8000,
+    "virtualWater": 144000000
+  },
+  "Flavors": {
+    "waterFootprint": 2500,
+    "annualExport": 5000,
+    "virtualWater": 125000000
+  },
+  "Colors": {
+    "waterFootprint": 1200,
+    "annualExport": 10000,
+    "virtualWater": 120000000
+  },
+  "Spices": {
+    "waterFootprint": 1500,
+    "annualExport": 20000,
+    "virtualWater": 300000000
+  },
+  "Herbs": {
+    "waterFootprint": 1000,
+    "annualExport": 15000,
+    "virtualWater": 150000000
+  },
+  "Cinnamon": {
+    "waterFootprint": 4000,
+    "annualExport": 5000,
+    "virtualWater": 200000000
+  },
+  "Nutmeg": {
+    "waterFootprint": 3500,
+    "annualExport": 3000,
+    "virtualWater": 105000000
+  },
+  "Ginger": {
+    "waterFootprint": 1200,
+    "annualExport": 10000,
+    "virtualWater": 120000000
+  },
+  "Turmeric": {
+    "waterFootprint": 1500,
+    "annualExport": 8000,
+    "virtualWater": 120000000
+  },
+  "Paprika": {
+    "waterFootprint": 2000,
+    "annualExport": 6000,
+    "virtualWater": 120000000
+  },
+  "Saffron": {
+    "waterFootprint": 5000,
+    "annualExport": 2000,
+    "virtualWater": 100000000
+  },
+  "Cloves": {
+    "waterFootprint": 3000,
+    "annualExport": 4000,
+    "virtualWater": 120000000
+  },
+  "Cardamom": {
+    "waterFootprint": 2500,
+    "annualExport": 3000,
+    "virtualWater": 75000000
+  },
+  "Star Anise": {
+    "waterFootprint": 2000,
+    "annualExport": 5000,
+    "virtualWater": 100000000
+  },
+  "Fennel": {
+    "waterFootprint": 1800,
+    "annualExport": 4000,
+    "virtualWater": 72000000
+  },
+  "Coriander": {
+    "waterFootprint": 1500,
+    "annualExport": 6000,
+    "virtualWater": 90000000
+  },
+  "Caraway": {
+    "waterFootprint": 2200,
+    "annualExport": 3000,
+    "virtualWater": 66000000
+  },
+  "Dill": {
+    "waterFootprint": 1200,
+    "annualExport": 5000,
+    "virtualWater": 60000000
+  },
+  "Basil": {
+    "waterFootprint": 1400,
+    "annualExport": 4000,
+    "virtualWater": 56000000
+  },
+  "Oregano": {
+    "waterFootprint": 1200,
+    "annualExport": 3000,
+    "virtualWater": 36000000
+  },
+  "Thyme": {
+    "waterFootprint": 1000,
+    "annualExport": 2000,
+    "virtualWater": 20000000
+  },
+  "Rosemary": {
+    "waterFootprint": 1500,
+    "annualExport": 1500,
+    "virtualWater": 22500000
+  },
+  "Lavender": {
+    "waterFootprint": 1200,
+    "annualExport": 1000,
+    "virtualWater": 12000000
+  },
+  "Bananas": {
+    "waterFootprint": 560,
+    "annualExport": 6000,
+    "virtualWater": 33600000
+  },
+  "Oranges": {
+    "waterFootprint": 560,
+    "annualExport": 5000,
+    "virtualWater": 28000000
+  },
+  "Lemons": {
+    "waterFootprint": 700,
+    "annualExport": 2500,
+    "virtualWater": 17500000
+  },
+  "Strawberries": {
+    "waterFootprint": 1000,
+    "annualExport": 3000,
+    "virtualWater": 30000000
+  },
+  "Blueberries": {
+    "waterFootprint": 1200,
+    "annualExport": 2500,
+    "virtualWater": 30000000
+  },
+  "Avocados": {
+    "waterFootprint": 2000,
+    "annualExport": 3000,
+    "virtualWater": 60000000
+  },
+  "Mangoes": {
+    "waterFootprint": 2000,
+    "annualExport": 4000,
+    "virtualWater": 80000000
+  },
+  "Pineapples": {
+    "waterFootprint": 1800,
+    "annualExport": 5000,
+    "virtualWater": 90000000
+  },
+  "Papayas": {
+    "waterFootprint": 1500,
+    "annualExport": 2000,
+    "virtualWater": 30000000
+  },
+  "Peaches": {
+    "waterFootprint": 1000,
+    "annualExport": 2500,
+    "virtualWater": 25000000
+  },
+  "Plums": {
+    "waterFootprint": 1200,
+    "annualExport": 2000,
+    "virtualWater": 24000000
+  },
+  "Cherries": {
+    "waterFootprint": 1500,
+    "annualExport": 1500,
+    "virtualWater": 22500000
+  },
+  "Pomegranates": {
+    "waterFootprint": 1800,
+    "annualExport": 1000,
+    "virtualWater": 18000000
+  },
+  "Grapes": {
+    "waterFootprint": 1200,
+    "annualExport": 4000,
+    "virtualWater": 48000000
+  },
+  "Kiwifruit": {
+    "waterFootprint": 1500,
+    "annualExport": 2000,
+    "virtualWater": 30000000
+  },
+  "Guavas": {
+    "waterFootprint": 1800,
+    "annualExport": 1000,
+    "virtualWater": 18000000
+  },
+  "Lychees": {
+    "waterFootprint": 2000,
+    "annualExport": 800,
+    "virtualWater": 16000000
+  },
+  "Durian": {
+    "waterFootprint": 2200,
+    "annualExport": 500,
+    "virtualWater": 11000000
+  },
+  "Dragon Fruit": {
+    "waterFootprint": 2500,
+    "annualExport": 400,
+    "virtualWater": 10000000
+  },
+  "Dates (Medjool)": {
+    "waterFootprint": 6000,
+    "annualExport": 1500,
+    "virtualWater": 90000000
+  },
+  "Raisins (Golden)": {
+    "waterFootprint": 5500,
+    "annualExport": 2000,
+    "virtualWater": 110000000
+  },
+  "Dried Apricots": {
+    "waterFootprint": 4000,
+    "annualExport": 1500,
+    "virtualWater": 60000000
+  },
+  "Dried Figs": {
+    "waterFootprint": 4500,
+    "annualExport": 800,
+    "virtualWater": 36000000
+  },
+  "Almonds": {
+    "waterFootprint": 12000,
+    "annualExport": 30000,
+    "virtualWater": 360000000
+  },
+  "Cashews": {
+    "waterFootprint": 8000,
+    "annualExport": 20000,
+    "virtualWater": 160000000
+  },
+  "Walnuts": {
+    "waterFootprint": 6000,
+    "annualExport": 15000,
+    "virtualWater": 90000000
+  },
+  "Pecans": {
+    "waterFootprint": 9000,
+    "annualExport": 8000,
+    "virtualWater": 720000000
+  },
+  "Hazelnuts": {
+    "waterFootprint": 7000,
+    "annualExport": 12000,
+    "virtualWater": 840000000
+  },
+  "Macadamia Nuts": {
+    "waterFootprint": 15000,
+    "annualExport": 5000,
+    "virtualWater": 750000000
+  },
+  "Pine Nuts": {
+    "waterFootprint": 10000,
+    "annualExport": 4000,
+    "virtualWater": 400000000
+  },
+  "Sunflower Seeds": {
+    "waterFootprint": 3000,
+    "annualExport": 8000,
+    "virtualWater": 240000000
+  },
+  "Pumpkin Seeds": {
+    "waterFootprint": 3500,
+    "annualExport": 5000,
+    "virtualWater": 175000000
+  },
+  "Chia Seeds": {
+    "waterFootprint": 5000,
+    "annualExport": 3000,
+    "virtualWater": 150000000
+  },
+  "Flaxseeds": {
+    "waterFootprint": 4000,
+    "annualExport": 4000,
+    "virtualWater": 160000000
+  },
+  "Sesame Seeds": {
+    "waterFootprint": 6000,
+    "annualExport": 6000,
+    "virtualWater": 360000000
+  },
+  "Soybeans": {
+    "waterFootprint": 2500,
+    "annualExport": 40000,
+    "virtualWater": 1000000000
+  },
+  "Lentils": {
+    "waterFootprint": 2800,
+    "annualExport": 20000,
+    "virtualWater": 560000000
+  },
+  "Chickpeas": {
+    "waterFootprint": 2000,
+    "annualExport": 15000,
+    "virtualWater": 300000000
+  },
+  "Peas": {
+    "waterFootprint": 1800,
+    "annualExport": 10000,
+    "virtualWater": 180000000
+  },
+  "Kidney Beans": {
+    "waterFootprint": 2500,
+    "annualExport": 8000,
+    "virtualWater": 200000000
+  },
+  "Black Beans": {
+    "waterFootprint": 2300,
+    "annualExport": 6000,
+    "virtualWater": 138000000
+  },
+  "Mung Beans": {
+    "waterFootprint": 1800,
+    "annualExport": 7000,
+    "virtualWater": 126000000
+  },
+  "Adzuki Beans": {
+    "waterFootprint": 2200,
+    "annualExport": 4000,
+    "virtualWater": 88000000
+  },
+  "Green Beans": {
+    "waterFootprint": 1600,
+    "annualExport": 5000,
+    "virtualWater": 80000000
+  },
+  "Edamame": {
+    "waterFootprint": 2000,
+    "annualExport": 3000,
+    "virtualWater": 60000000
+  },
+  "Tofu": {
+    "waterFootprint": 2500,
+    "annualExport": 2500,
+    "virtualWater": 62500000
+  },
+  "Tempeh": {
+    "waterFootprint": 3000,
+    "annualExport": 1500,
+    "virtualWater": 45000000
+  },
+  "Soy Milk": {
+    "waterFootprint": 2000,
+    "annualExport": 2000,
+    "virtualWater": 40000000
+  },
+  "Soy Sauce": {
+    "waterFootprint": 2500,
+    "annualExport": 3000,
+    "virtualWater": 75000000
+  },
+  "Miso Paste": {
+    "waterFootprint": 2800,
+    "annualExport": 1000,
+    "virtualWater": 28000000
+  },
+  "Wasabi": {
+    "waterFootprint": 4000,
+    "annualExport": 800,
+    "virtualWater": 32000000
+  },
+  "Seaweed": {
+    "waterFootprint": 1200,
+    "annualExport": 3000,
+    "virtualWater": 36000000
+  },
+  "Spirulina": {
+    "waterFootprint": 2500,
+    "annualExport": 1000,
+    "virtualWater": 25000000
+  },
+  "Chlorella": {
+    "waterFootprint": 3000,
+    "annualExport": 800,
+    "virtualWater": 24000000
+  },
+  "Hemp Seeds": {
+    "waterFootprint": 2500,
+    "annualExport": 2000,
+    "virtualWater": 50000000
+  },
+  "Beetroot Powder": {
+    "waterFootprint": 3000,
+    "annualExport": 1500,
+    "virtualWater": 45000000
+  },
+  "Carrot Powder": {
+    "waterFootprint": 2800,
+    "annualExport": 1000,
+    "virtualWater": 28000000
+  },
+  "Spinach Powder": {
+    "waterFootprint": 3500,
+    "annualExport": 800,
+    "virtualWater": 28000000
+  },
+  "Kale Powder": {
+    "waterFootprint": 4000,
+    "annualExport": 600,
+    "virtualWater": 24000000
+  },
+  "Tomato Powder": {
+    "waterFootprint": 2500,
+    "annualExport": 1200,
+    "virtualWater": 30000000
+  },
+  "Green Tea Powder": {
+    "waterFootprint": 3500,
+    "annualExport": 1000,
+    "virtualWater": 35000000
+  },
+  "Matcha": {
+    "waterFootprint": 4000,
+    "annualExport": 800,
+    "virtualWater": 32000000
+  },
+  "Coffee Beans": {
+    "waterFootprint": 18000,
+    "annualExport": 10000,
+    "virtualWater": 180000000
+  },
+  "Tea Leaves": {
+    "waterFootprint": 1500,
+    "annualExport": 15000,
+    "virtualWater": 225000000
+  },
+  "Cocoa Beans": {
+    "waterFootprint": 28000,
+    "annualExport": 5000,
+    "virtualWater": 140000000
+  },
+  "Vanilla Beans": {
+    "waterFootprint": 12000,
+    "annualExport": 1000,
+    "virtualWater": 120000000
+  },
+  "Cinnamon": {
+    "waterFootprint": 8000,
+    "annualExport": 2000,
+    "virtualWater": 160000000
+  },
+  "Nutmeg": {
+    "waterFootprint": 10000,
+    "annualExport": 1500,
+    "virtualWater": 150000000
+  },
+  "Cloves": {
+    "waterFootprint": 9000,
+    "annualExport": 1000,
+    "virtualWater": 90000000
+  },
+  "Cardamom": {
+    "waterFootprint": 6000,
+    "annualExport": 2500,
+    "virtualWater": 150000000
+  },
+  "Ginger": {
+    "waterFootprint": 2500,
+    "annualExport": 5000,
+    "virtualWater": 125000000
+  },
+  "Turmeric": {
+    "waterFootprint": 3000,
+    "annualExport": 3000,
+    "virtualWater": 90000000
+  },
+  "Coriander Seeds": {
+    "waterFootprint": 4500,
+    "annualExport": 1500,
+    "virtualWater": 67500000
+  },
+  "Dill Seeds": {
+    "waterFootprint": 3500,
+    "annualExport": 1000,
+    "virtualWater": 35000000
+  },
+  "Mustard Seeds": {
+    "waterFootprint": 3000,
+    "annualExport": 2000,
+    "virtualWater": 60000000
+  },
+  "Cumin Seeds": {
+    "waterFootprint": 4000,
+    "annualExport": 1500,
+    "virtualWater": 60000000
+  },
+  "Caraway Seeds": {
+    "waterFootprint": 5000,
+    "annualExport": 800,
+    "virtualWater": 40000000
+  },
+  "Sesame Oil": {
+    "waterFootprint": 6000,
+    "annualExport": 1000,
+    "virtualWater": 60000000
+  },
+  "Sunflower Oil": {
+    "waterFootprint": 3000,
+    "annualExport": 5000,
+    "virtualWater": 150000000
+  },
+  "Olive Oil": {
+    "waterFootprint": 3500,
+    "annualExport": 10000,
+    "virtualWater": 350000000
+  },
+  "Coconut Oil": {
+    "waterFootprint": 2800,
+    "annualExport": 15000,
+    "virtualWater": 420000000
+  },
+  "Palm Oil": {
+    "waterFootprint": 2500,
+    "annualExport": 20000,
+    "virtualWater": 500000000
+  },
+  "Soybean Oil": {
+    "waterFootprint": 2000,
+    "annualExport": 15000,
+    "virtualWater": 300000000
+  },
+  "Canola Oil": {
+    "waterFootprint": 1800,
+    "annualExport": 10000,
+    "virtualWater": 180000000
+  },
+  "Corn Oil": {
+    "waterFootprint": 2200,
+    "annualExport": 8000,
+    "virtualWater": 176000000
+  },
+  "Cottonseed Oil": {
+    "waterFootprint": 2500,
+    "annualExport": 6000,
+    "virtualWater": 150000000
+  },
+  "Peanut Oil": {
+    "waterFootprint": 3000,
+    "annualExport": 5000,
+    "virtualWater": 150000000
+  },
+  "Rice Bran Oil": {
+    "waterFootprint": 2800,
+    "annualExport": 4000,
+    "virtualWater": 112000000
+  },
+  "Wheat Germ Oil": {
+    "waterFootprint": 3500,
+    "annualExport": 3000,
+    "virtualWater": 105000000
+  },
+  "Grape Seed Oil": {
+    "waterFootprint": 3000,
+    "annualExport": 2500,
+    "virtualWater": 75000000
+  },
+  "Avocado Oil": {
+    "waterFootprint": 2200,
+    "annualExport": 2000,
+    "virtualWater": 44000000
+  },
+  "Hazelnut Oil": {
+    "waterFootprint": 4000,
+    "annualExport": 1500,
+    "virtualWater": 60000000
+  },
+  "Almond Oil": {
+    "waterFootprint": 5000,
+    "annualExport": 1000,
+    "virtualWater": 50000000
+  },
+  "Walnut Oil": {
+    "waterFootprint": 6000,
+    "annualExport": 800,
+    "virtualWater": 48000000
+  },
+  "Pistachio Oil": {
+    "waterFootprint": 7000,
+    "annualExport": 500,
+    "virtualWater": 35000000
+  },
+  "Caseinates": {
+    "waterFootprint": 8500,
+    "annualExport": 700,
+    "virtualWater": 59500000
+  },
+  "Lactulose": {
+    "waterFootprint": 7000,
+    "annualExport": 600,
+    "virtualWater": 42000000
+  },
+  "Maltodextrin": {
+    "waterFootprint": 4000,
+    "annualExport": 3000,
+    "virtualWater": 120000000
+  },
+  "Inulin": {
+    "waterFootprint": 4800,
+    "annualExport": 800,
+    "virtualWater": 38400000
+  },
+  "Fructooligosaccharides": {
+    "waterFootprint": 5200,
+    "annualExport": 700,
+    "virtualWater": 36400000
+  },
+  "Galactooligosaccharides": {
+    "waterFootprint": 5500,
+    "annualExport": 600,
+    "virtualWater": 33000000
+  },
+  "Lactic Acid": {
+    "waterFootprint": 4000,
+    "annualExport": 2500,
+    "virtualWater": 100000000
+  },
+  "Citric Acid": {
+    "waterFootprint": 6500,
+    "annualExport": 2000,
+    "virtualWater": 130000000
+  },
+  "Tartaric Acid": {
+    "waterFootprint": 5000,
+    "annualExport": 1500,
+    "virtualWater": 75000000
+  },
+  "Malic Acid": {
+    "waterFootprint": 4800,
+    "annualExport": 1200,
+    "virtualWater": 57600000
+  },
+  "Ascorbic Acid": {
+    "waterFootprint": 6000,
+    "annualExport": 2000,
+    "virtualWater": 120000000
+  },
+  "Niacin": {
+    "waterFootprint": 4500,
+    "annualExport": 1500,
+    "virtualWater": 67500000
+  },
+  "Riboflavin": {
+    "waterFootprint": 5000,
+    "annualExport": 1200,
+    "virtualWater": 60000000
+  },
+  "Pyridoxine": {
+    "waterFootprint": 5500,
+    "annualExport": 1000,
+    "virtualWater": 55000000
+  },
+  "Folate": {
+    "waterFootprint": 6000,
+    "annualExport": 800,
+    "virtualWater": 48000000
+  },
+  "Vitamin D": {
+    "waterFootprint": 7000,
+    "annualExport": 500,
+    "virtualWater": 35000000
+  },
+  "Vitamin E": {
+    "waterFootprint": 6500,
+    "annualExport": 600,
+    "virtualWater": 39000000
+  },
+  "Vitamin K": {
+    "waterFootprint": 6000,
+    "annualExport": 700,
+    "virtualWater": 42000000
+  },
+  "Beta-Carotene": {
+    "waterFootprint": 7000,
+    "annualExport": 500,
+    "virtualWater": 35000000
+  },
+  "Carotenoids": {
+    "waterFootprint": 6500,
+    "annualExport": 400,
+    "virtualWater": 26000000
+  },
+  "Lutein": {
+    "waterFootprint": 6800,
+    "annualExport": 300,
+    "virtualWater": 20400000
+  },
+  "Zeaxanthin": {
+    "waterFootprint": 6000,
+    "annualExport": 200,
+    "virtualWater": 12000000
+  },
+  "Chlorophyll": {
+    "waterFootprint": 5500,
+    "annualExport": 250,
+    "virtualWater": 13750000
+  },
+  "Phytosterols": {
+    "waterFootprint": 5000,
+    "annualExport": 300,
+    "virtualWater": 15000000
+  },
+  "Squalene": {
+    "waterFootprint": 7000,
+    "annualExport": 100,
+    "virtualWater": 7000000
+  },
+  "Coenzyme Q10": {
+    "waterFootprint": 8000,
+    "annualExport": 50,
+    "virtualWater": 4000000
+  },
+  "Glucosamine": {
+    "waterFootprint": 5500,
+    "annualExport": 80,
+    "virtualWater": 4400000
+  },
+  "Chondroitin": {
+    "waterFootprint": 6000,
+    "annualExport": 60,
+    "virtualWater": 3600000
+  },
+  "Collagen": {
+    "waterFootprint": 7500,
+    "annualExport": 70,
+    "virtualWater": 5250000
+  },
+  "Xanthan Gum": {
+    "waterFootprint": 5500,
+    "annualExport": 200,
+    "virtualWater": 11000000
+  },
+  "Guar Gum": {
+    "waterFootprint": 6000,
+    "annualExport": 250,
+    "virtualWater": 15000000
+  },
+  "Locust Bean Gum": {
+    "waterFootprint": 5800,
+    "annualExport": 180,
+    "virtualWater": 10440000
+  },
+  "Carrageenan": {
+    "waterFootprint": 5000,
+    "annualExport": 300,
+    "virtualWater": 15000000
+  },
+  "Sodium Alginate": {
+    "waterFootprint": 5200,
+    "annualExport": 220,
+    "virtualWater": 11440000
+  },
+  "CMC (Carboxymethyl Cellulose)": {
+    "waterFootprint": 6000,
+    "annualExport": 150,
+    "virtualWater": 9000000
+  },
+  "Microcrystalline Cellulose": {
+    "waterFootprint": 5500,
+    "annualExport": 250,
+    "virtualWater": 13750000
+  },
+  "Cellulose Powder": {
+    "waterFootprint": 4800,
+    "annualExport": 180,
+    "virtualWater": 8640000
+  },
+  "Hydroxypropyl Cellulose": {
+    "waterFootprint": 6200,
+    "annualExport": 130,
+    "virtualWater": 8060000
+  },
+  "Polyvinyl Alcohol": {
+    "waterFootprint": 6500,
+    "annualExport": 100,
+    "virtualWater": 6500000
+  },
+  "Polyethylene Glycol": {
+    "waterFootprint": 7000,
+    "annualExport": 80,
+    "virtualWater": 5600000
+  },
+  "Polysorbate 80": {
+    "waterFootprint": 5500,
+    "annualExport": 150,
+    "virtualWater": 8250000
+  },
+  "Lecithin": {
+    "waterFootprint": 6000,
+    "annualExport": 200,
+    "virtualWater": 12000000
+  },
+  "Soy Protein": {
+    "waterFootprint": 6500,
+    "annualExport": 400,
+    "virtualWater": 26000000
+  },
+  "Pea Protein": {
+    "waterFootprint": 7000,
+    "annualExport": 300,
+    "virtualWater": 21000000
+  },
+  "Rice Protein": {
+    "waterFootprint": 5500,
+    "annualExport": 250,
+    "virtualWater": 13750000
+  },
+  "Hemp Protein": {
+    "waterFootprint": 6000,
+    "annualExport": 180,
+    "virtualWater": 10800000
+  },
+  "Almond Flour": {
+    "waterFootprint": 6200,
+    "annualExport": 500,
+    "virtualWater": 31000000
+  },
+  "Coconut Flour": {
+    "waterFootprint": 5800,
+    "annualExport": 400,
+    "virtualWater": 23200000
+  },
+  "Oat Flour": {
+    "waterFootprint": 5000,
+    "annualExport": 600,
+    "virtualWater": 30000000
+  },
+  "Chickpea Flour": {
+    "waterFootprint": 5200,
+    "annualExport": 300,
+    "virtualWater": 15600000
+  },
+  "Quinoa Flour": {
+    "waterFootprint": 6000,
+    "annualExport": 350,
+    "virtualWater": 21000000
+  },
+  "Amaranth Flour": {
+    "waterFootprint": 5800,
+    "annualExport": 250,
+    "virtualWater": 14500000
+  },
+  "Buckwheat Flour": {
+    "waterFootprint": 4500,
+    "annualExport": 200,
+    "virtualWater": 9000000
+  },
+  "Rye Flour": {
+    "waterFootprint": 4800,
+    "annualExport": 500,
+    "virtualWater": 24000000
+  },
+  "Barley Flour": {
+    "waterFootprint": 5000,
+    "annualExport": 400,
+    "virtualWater": 20000000
+  },
+  "Arrowroot Starch": {
+    "waterFootprint": 5500,
+    "annualExport": 500,
+    "virtualWater": 27500000
+  },
+  "Sago Starch": {
+    "waterFootprint": 5800,
+    "annualExport": 400,
+    "virtualWater": 23200000
+  },
+  "Rice Starch": {
+    "waterFootprint": 5200,
+    "annualExport": 600,
+    "virtualWater": 31200000
+  },
+  "Wheat Starch": {
+    "waterFootprint": 4800,
+    "annualExport": 1000,
+    "virtualWater": 48000000
+  },
+  "Modified Starch": {
+    "waterFootprint": 6000,
+    "annualExport": 800,
+    "virtualWater": 48000000
+  },
+  "Tamarind Kernel Powder": {
+    "waterFootprint": 5500,
+    "annualExport": 300,
+    "virtualWater": 16500000
+  },
+  "Guar Meal": {
+    "waterFootprint": 6200,
+    "annualExport": 200,
+    "virtualWater": 12400000
+  },
+  "Sesame Oil": {
+    "waterFootprint": 7000,
+    "annualExport": 150,
+    "virtualWater": 10500000
+  },
+  "Sunflower Oil": {
+    "waterFootprint": 6500,
+    "annualExport": 500,
+    "virtualWater": 32500000
+  },
+  "Canola Oil": {
+    "waterFootprint": 5800,
+    "annualExport": 800,
+    "virtualWater": 46400000
+  },
+  "Coconut Oil": {
+    "waterFootprint": 6000,
+    "annualExport": 600,
+    "virtualWater": 36000000
+  },
+  "Olive Oil": {
+    "waterFootprint": 7500,
+    "annualExport": 400,
+    "virtualWater": 30000000
+  },
+  "Palm Oil": {
+    "waterFootprint": 6200,
+    "annualExport": 1200,
+    "virtualWater": 74400000
+  },
+  "Soybean Oil": {
+    "waterFootprint": 6000,
+    "annualExport": 1500,
+    "virtualWater": 90000000
+  },
+  "Corn Oil": {
+    "waterFootprint": 5500,
+    "annualExport": 1000,
+    "virtualWater": 55000000
+  },
+  "Rice Bran Oil": {
+    "waterFootprint": 6500,
+    "annualExport": 600,
+    "virtualWater": 39000000
+  },
+  "Wheat Germ Oil": {
+    "waterFootprint": 7000,
+    "annualExport": 400,
+    "virtualWater": 28000000
+  },
+  "Grape Seed Oil": {
+    "waterFootprint": 6200,
+    "annualExport": 300,
+    "virtualWater": 18600000
+  },
+  "Avocado Oil": {
+    "waterFootprint": 7500,
+    "annualExport": 200,
+    "virtualWater": 15000000
+  },
+  "Fish Oil": {
+    "waterFootprint": 8000,
+    "annualExport": 100,
+    "virtualWater": 8000000
+  },
+  "Krill Oil": {
+    "waterFootprint": 9000,
+    "annualExport": 50,
+    "virtualWater": 4500000
+  },
+  "Flaxseed Oil": {
+    "waterFootprint": 6500,
+    "annualExport": 300,
+    "virtualWater": 19500000
+  },
+  "Chia Seed Oil": {
+    "waterFootprint": 7000,
+    "annualExport": 200,
+    "virtualWater": 14000000
+  },
+  "Borage Oil": {
+    "waterFootprint": 7500,
+    "annualExport": 150,
+    "virtualWater": 11250000
+  },
+  "Evening Primrose Oil": {
+    "waterFootprint": 8000,
+    "annualExport": 100,
+    "virtualWater": 8000000
+  },
+  "Rosehip Oil": {
+    "waterFootprint": 9000,
+    "annualExport": 50,
+    "virtualWater": 4500000
+  },
+  "Pomegranate Oil": {
+    "waterFootprint": 8500,
+    "annualExport": 40,
+    "virtualWater": 3400000
+  },
+  "Sea Buckthorn Oil": {
+    "waterFootprint": 9500,
+    "annualExport": 30,
+    "virtualWater": 2850000
+  },
+  "Argan Oil": {
+    "waterFootprint": 10000,
+    "annualExport": 20,
+    "virtualWater": 2000000
+  },
+  "Jojoba Oil": {
+    "waterFootprint": 8000,
+    "annualExport": 50,
+    "virtualWater": 4000000
+  },
+  "Sweet Almond Oil": {
+    "waterFootprint": 7500,
+    "annualExport": 60,
+    "virtualWater": 4500000
+  },
+  "Grapeseed Oil": {
+    "waterFootprint": 6500,
+    "annualExport": 80,
+    "virtualWater": 5200000
+  },
+  "Hazelnut Oil": {
+    "waterFootprint": 8500,
+    "annualExport": 40,
+    "virtualWater": 3400000
+  }
+
+            // Add more crops as needed
+        };
+
+        const ctx = document.getElementById('waterFootprintChart').getContext('2d');
+        let waterFootprintChart;
+
+        function getFootprint() {
+            const crop = document.getElementById("cropSelect").value;
+            const data = cropData[crop];
+
+            if (data) {
+                document.getElementById("waterFootprint").textContent = data.waterFootprint + " liters/kg";
+                document.getElementById("virtualWater").textContent = data.virtualWater + " m³";
+                document.getElementById("annualExport").textContent = data.annualExport + " tons";
+
+                // Update chart
+                updateChart(data);
+            }
+        }
+
+        function updateChart(data) {
+            const waterFootprint = data.waterFootprint;
+            const virtualWater = data.virtualWater / 1000000; // Convert to million cubic meters for better visualization
+            const annualExport = data.annualExport / 1000; // Convert to thousand tons
+
+            // Destroy the existing chart if it exists
+            if (waterFootprintChart) {
+                waterFootprintChart.destroy();
+            }
+
+            // Create a new pie chart with different vibrant colors
+            waterFootprintChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Water Footprint (L/kg)', 'Virtual Water Export (M³)', 'Annual Export (Tons)'],
+                    datasets: [{
+                        label: 'Water Data',
+                        data: [waterFootprint, virtualWater, annualExport],
+                        backgroundColor: [
+                            'rgba(255, 45, 85, 0.7)',  // Bright red
+                            'rgba(0, 204, 255, 0.7)',  // Bright cyan
+                            'rgba(255, 165, 0, 0.7)',   // Bright orange
+                            'rgba(51, 204, 51, 0.7)',   // Bright green
+                            'rgba(153, 51, 255, 0.7)'   // Bright purple
+                        ],
+                        borderColor: [
+                            'rgba(255, 45, 85, 1)',
+                            'rgba(0, 204, 255, 1)',
+                            'rgba(255, 165, 0, 1)',
+                            'rgba(51, 204, 51, 1)',
+                            'rgba(153, 51, 255, 1)'
+                        ],
+                        borderWidth: 2 // Border width for pie slices
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    animation: {
+                        animateRotate: true, // Rotate animation
+                        animateScale: true, // Scale animation
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Crop Water Footprint and Exports'
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    .loader {
+      width: 100vw;
+     
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .truckWrapper {
+      width: 200px;
+      height: 100px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      align-items: center;
+      justify-content: flex-end;
+      overflow-x: hidden;
+      animation: moveTruck 5s linear infinite;
+    }
+
+    /* Animation to move the truck across the page */
+    @keyframes moveTruck {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(100vw);
+      }
+    }
+
+    /* truck upper body */
+    .truckBody {
+      width: 130px;
+      height: fit-content;
+      margin-bottom: 6px;
+      position: relative;
+      animation: motion 1s linear infinite;
+    }
+
+    /* Add text inside truck */
+    .truckText {
+      position: absolute;
+      top: 15px;
+      left: 15px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      font-weight: bold;
+      color: #282828;
+    }
+
+    /* truck suspension animation */
+    @keyframes motion {
+      0% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(3px);
+      }
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    /* truck's tires */
+    .truckTires {
+      width: 130px;
+      height: fit-content;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0px 10px 0px 15px;
+      position: absolute;
+      bottom: 0;
+    }
+
+    .truckTires svg {
+      width: 24px;
+    }
+
+    .road {
+      width: 100%;
+      height: 1.5px;
+      background-color: #282828;
+      position: relative;
+      bottom: 0;
+      align-self: flex-end;
+      border-radius: 3px;
+    }
+
+    .road::before {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 100%;
+      background-color: #282828;
+      right: -50%;
+      border-radius: 3px;
+      animation: roadAnimation 1.4s linear infinite;
+      border-left: 10px solid white;
+    }
+
+    .road::after {
+      content: "";
+      position: absolute;
+      width: 10px;
+      height: 100%;
+      background-color: #282828;
+      right: -65%;
+      border-radius: 3px;
+      animation: roadAnimation 1.4s linear infinite;
+      border-left: 4px solid white;
+    }
+
+    @keyframes roadAnimation {
+      0% {
+        transform: translateX(0px);
+      }
+      100% {
+        transform: translateX(-350px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="loader">
+    <div class="truckWrapper">
+      <div class="truckBody">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 198 93"
+          class="trucksvg"
+        >
+          <path
+            stroke-width="3"
+            stroke="#282828"
+            fill="#F83D3D"
+            d="M135 22.5H177.264C178.295 22.5 179.22 23.133 179.594 24.0939L192.33 56.8443C192.442 57.1332 192.5 57.4404 192.5 57.7504V89C192.5 90.3807 191.381 91.5 190 91.5H135C133.619 91.5 132.5 90.3807 132.5 89V25C132.5 23.6193 133.619 22.5 135 22.5Z"
+          ></path>
+          <path
+            stroke-width="3"
+            stroke="#282828"
+            fill="#7D7C7C"
+            d="M146 33.5H181.741C182.779 33.5 183.709 34.1415 184.078 35.112L190.538 52.112C191.16 53.748 189.951 55.5 188.201 55.5H146C144.619 55.5 143.5 54.3807 143.5 53V36C143.5 34.6193 144.619 33.5 146 33.5Z"
+          ></path>
+          <path
+            stroke-width="2"
+            stroke="#282828"
+            fill="#282828"
+            d="M150 65C150 65.39 149.763 65.8656 149.127 66.2893C148.499 66.7083 147.573 67 146.5 67C145.427 67 144.501 66.7083 143.873 66.2893C143.237 65.8656 143 65.39 143 65C143 64.61 143.237 64.1344 143.873 63.7107C144.501 63.2917 145.427 63 146.5 63C147.573 63 148.499 63.2917 149.127 63.7107C149.763 64.1344 150 64.61 150 65Z"
+          ></path>
+          <rect
+            stroke-width="2"
+            stroke="#282828"
+            fill="#FFFCAB"
+            rx="1"
+            height="7"
+            width="5"
+            y="63"
+            x="187"
+          ></rect>
+          <rect
+            stroke-width="2"
+            stroke="#282828"
+            fill="#282828"
+            rx="1"
+            height="11"
+            width="4"
+            y="81"
+            x="193"
+          ></rect>
+          <rect
+            stroke-width="3"
+            stroke="#282828"
+            fill="#DFDFDF"
+            rx="2.5"
+            height="90"
+            width="121"
+            y="1.5"
+            x="6.5"
+          ></rect>
+          <rect
+            stroke-width="2"
+            stroke="#282828"
+            fill="#DFDFDF"
+            rx="2"
+            height="4"
+            width="6"
+            y="84"
+            x="1"
+          ></rect>
+        </svg>
+        <div class="truckText">VIRTUAL<br>WATER</div>
+
+      </div>
+      <div class="truckTires">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 30 30"
+          class="tiresvg"
+        >
+          <circle
+            stroke-width="3"
+            stroke="#282828"
+            fill="#282828"
+            r="13.5"
+            cy="15"
+            cx="15"
+          ></circle>
+          <circle fill="#DFDFDF" r="7" cy="15" cx="15"></circle>
+        </svg>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 30 30"
+          class="tiresvg"
+        >
+          <circle
+            stroke-width="3"
+            stroke="#282828"
+            fill="#282828"
+            r="13.5"
+            cy="15"
+            cx="15"
+          ></circle>
+          <circle fill="#DFDFDF" r="7" cy="15" cx="15"></circle>
+        </svg>
+      </div>
+      <div class="road"></div>
+    </div>
+  </div>
+</body>
+</html>
